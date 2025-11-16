@@ -27,7 +27,7 @@ if (document.readyState === 'loading') {
 
 async function loadAllData() {
   try {
-    const portfolioResponse = await fetchJsonWithRetry('my information.json');
+    const portfolioResponse = await fetchJsonWithRetry('my_information.json');
     portfolioData = portfolioResponse;
     console.log('Portfolio data loaded successfully', portfolioData);
     
@@ -43,15 +43,23 @@ async function loadAllData() {
   }
 }
 
+// The fetchJsonWithRetry and showError functions will be moved/copied to blog.js and post.js as well.
+// Keeping them here for completeness in main.js context for now.
 async function fetchJsonWithRetry(url) {
+  // GitHub Pages might require absolute paths or paths relative to the base URL
+  const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+  
   const possiblePaths = [
-    url,
-    `./${url}`,
+    url, // Original path
+    `./${url}`, // Relative to current directory
+    `/${url}`, // Relative to root
+    `${baseUrl}${url}`, // Absolute path using base URL
     encodeURI(url),
-    encodeURI(`./${url}`)
+    encodeURI(`./${url}`),
+    encodeURI(`/${url}`),
+    encodeURI(`${baseUrl}${url}`)
   ];
   
-  let response = null;
   let lastError = null;
   
   for (const path of possiblePaths) {
@@ -69,6 +77,22 @@ async function fetchJsonWithRetry(url) {
     }
   }
   throw new Error(`Failed to load JSON file (${url}). Last error: ${lastError?.message || 'Unknown error'}`);
+}
+
+function showError(title, message) {
+  const container = document.querySelector('.main-content') || document.body;
+  const errorMsg = document.createElement('div');
+  errorMsg.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); z-index: 9999; text-align: center; max-width: 600px; box-shadow: var(--shadow-lg);';
+  errorMsg.innerHTML = `
+    <h3 style="color: var(--accent); margin-bottom: 1rem;">${title}</h3>
+    <p style="color: var(--text-secondary); margin-bottom: 1rem;">${message}</p>
+    <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
+      If you are viewing this on GitHub Pages, ensure your repository name is correctly configured as the base URL.
+      Also, check your browser's console (F12) and network tab for specific errors related to loading JSON files.
+    </p>
+    <button onclick="this.parentElement.remove()" style="margin-top: 1rem; padding: 0.5rem 1.5rem; background: var(--accent); border: none; border-radius: 6px; color: white; cursor: pointer;">Close</button>
+  `;
+  container.appendChild(errorMsg);
 }
 
 function populateAllSections() {
@@ -531,23 +555,6 @@ function initNavigation() {
     // Default to home if no hash and on index.html
     document.querySelector('#sidebar-nav .nav-links a[href="#home"]').classList.add('active');
   }
-}
-
-function showError(title, message) {
-  const container = document.querySelector('.main-content') || document.body;
-  const errorMsg = document.createElement('div');
-  errorMsg.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); z-index: 9999; text-align: center; max-width: 600px; box-shadow: var(--shadow-lg);';
-  errorMsg.innerHTML = `
-    <h3 style="color: var(--accent); margin-bottom: 1rem;">${title}</h3>
-    <p style="color: var(--text-secondary); margin-bottom: 1rem;">${message}</p>
-    <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
-      Make sure your JSON files (my information.json, data/posts.json) are correctly located 
-      and accessible.
-    </p>
-    <p style="color: var(--text-muted); font-size: 0.75rem;">Please check the browser console (F12) for more details.</p>
-    <button onclick="this.parentElement.remove()" style="margin-top: 1rem; padding: 0.5rem 1.5rem; background: var(--accent); border: none; border-radius: 6px; color: white; cursor: pointer;">Close</button>
-  `;
-  container.appendChild(errorMsg);
 }
 
 function applySystemTheme() {

@@ -81,8 +81,8 @@ async function loadBlogPost() {
     }
     
     // Load posts JSON
-    const response = await fetch('data/posts.json');
-    blogPosts = await response.json();
+    const response = await fetchJsonWithRetry('data/posts.json');
+    blogPosts = response;
     
     // Find the post
     const post = blogPosts.find(p => p.slug === slug);
@@ -148,22 +148,6 @@ function formatDate(dateString) {
   });
 }
 
-/**
- * Show error message on page
- */
-function showError(title, message) {
-  const container = document.querySelector('.main-content') || document.body;
-  const errorMsg = document.createElement('div');
-  errorMsg.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); z-index: 9999; text-align: center; max-width: 600px; box-shadow: var(--shadow-lg);';
-  errorMsg.innerHTML = `
-    <h3 style="color: var(--accent); margin-bottom: 1rem;">${title}</h3>
-    <p style="color: var(--text-secondary); margin-bottom: 1rem;">${message}</p>
-    <p style="color: var(--text-muted); font-size: 0.75rem;">Please check the browser console (F12) for more details.</p>
-    <button onclick="this.parentElement.remove()" style="margin-top: 1rem; padding: 0.5rem 1.5rem; background: var(--accent); border: none; border-radius: 6px; color: white; cursor: pointer;">Close</button>
-  `;
-  container.appendChild(errorMsg);
-}
-
 function applySystemTheme() {
   const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
   const savedTheme = localStorage.getItem('theme');
@@ -193,4 +177,52 @@ function initMobileMenuToggle() {
       });
     });
   }
+}
+
+// Utility functions for fetching JSON with retry and showing errors
+// These are copied from main.js to ensure they are available in this context
+async function fetchJsonWithRetry(url) {
+  const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+  const possiblePaths = [
+    url,
+    `./${url}`,
+    `/${url}`,
+    `${baseUrl}${url}`,
+    encodeURI(url),
+    encodeURI(`./${url}`),
+    encodeURI(`/${url}`),
+    encodeURI(`${baseUrl}${url}`)
+  ];
+  let lastError = null;
+  for (const path of possiblePaths) {
+    try {
+      const res = await fetch(path);
+      if (res.ok) {
+        console.log(`Successfully loaded from: ${path}`);
+        return await res.json();
+      } else {
+        lastError = new Error(`HTTP error! status: ${res.status} from ${path}`);
+      }
+    } catch (err) {
+      lastError = err;
+      console.warn(`Failed to load from ${path}:`, err);
+    }
+  }
+  throw new Error(`Failed to load JSON file (${url}). Last error: ${lastError?.message || 'Unknown error'}`);
+}
+
+function showError(title, message) {
+  const container = document.querySelector('.main-content') || document.body;
+  const errorMsg = document.createElement('div');
+  errorMsg.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); z-index: 9999; text-align: center; max-width: 600px; box-shadow: var(--shadow-lg);';
+  errorMsg.innerHTML = `
+    <h3 style="color: var(--accent); margin-bottom: 1rem;">${title}</h3>
+    <p style="color: var(--text-secondary); margin-bottom: 1rem;">${message}</p>
+    <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
+      If you are viewing this on GitHub Pages, ensure your repository name is correctly configured as the base URL.
+      Also, check your browser's console (F12) and network tab for specific errors related to loading JSON files.
+    </p>
+    <button onclick="this.parentElement.remove()" style="margin-top: 1rem; padding: 0.5rem 1.5rem; background: var(--accent); border: none; border-radius: 6px; color: white; cursor: pointer;">Close</button>
+  `;
+  container.appendChild(errorMsg);
 }
