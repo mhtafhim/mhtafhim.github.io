@@ -844,8 +844,10 @@ footer {
 
   #sidebar-nav .nav-links a {
     text-align: center;
-    width: 80%;
+    /* Removed fixed width to allow buttons to be responsive to text size */
     padding: var(--spacing-md); 
+    white-space: normal; /* Allow text to wrap */
+    word-wrap: break-word; /* Break long words */
   }
 
   .main-content {
