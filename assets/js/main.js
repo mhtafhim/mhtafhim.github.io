@@ -11,9 +11,9 @@ const BLOG_PREVIEW_COUNT = 3; // Number of blog posts to show initially
 // Initialize when DOM is ready
 function initialize() {
   console.log('Initializing portfolio...');
-  initThemeToggle();
   initNavigation();
   initScrollHide();
+  initMobileMenuToggle(); // Initialize mobile menu toggle
   loadAllData();
 }
 
@@ -93,43 +93,56 @@ function populateAllSections() {
 }
 
 function populateHero() {
-  const heroName = document.getElementById('hero-name');
-  const heroTagline = document.getElementById('hero-tagline');
-  const heroSocialLinksContainer = document.querySelector('.hero-social-links');
+  const heroSection = document.getElementById('hero');
+  if (!heroSection) return;
+
+  const heroName = heroSection.querySelector('.name');
+  const heroTagline = heroSection.querySelector('.tagline');
+  const heroSocialLinksContainer = heroSection.querySelector('.hero-social-links');
 
   if (portfolioData.personalInfo) {
     if (heroName) heroName.textContent = portfolioData.personalInfo.name;
     if (heroTagline) heroTagline.textContent = `Software Engineer & Problem Solver | ${portfolioData.personalInfo.location}`;
 
-    if (heroSocialLinksContainer && portfolioData.personalInfo.links) {
+    if (heroSocialLinksContainer) {
       let socialLinksHtml = '';
-      portfolioData.personalInfo.links.forEach(link => {
-        const platform = link.platform.toLowerCase();
-        let url = '';
-        let iconClass = '';
 
-        if (platform === 'github') {
-          url = `https://github.com/${link.username}`;
-          iconClass = 'fab fa-github';
-        } else if (platform === 'linkedin') {
-          url = `https://linkedin.com/in/${link.username}`;
-          iconClass = 'fab fa-linkedin-in';
-        } else if (platform === 'portfolio') {
-          url = `https://${link.username}.github.io`;
-          iconClass = 'fas fa-globe';
-        } else if (platform === 'email') {
-          url = `mailto:${portfolioData.personalInfo.contact.email}`;
-          iconClass = 'fas fa-envelope';
-        }
+      // Add Email link
+      if (portfolioData.personalInfo.contact && portfolioData.personalInfo.contact.email) {
+        socialLinksHtml += `
+          <a href="mailto:${portfolioData.personalInfo.contact.email}" class="social-icon">
+            <i class="fas fa-envelope"></i>
+          </a>
+        `;
+      }
 
-        if (url) {
-          socialLinksHtml += `
-            <a href="${url}" target="_blank" rel="noopener noreferrer" class="social-icon">
-              <i class="${iconClass}"></i>
-            </a>
-          `;
-        }
-      });
+      // Add other social links
+      if (portfolioData.personalInfo.links) {
+        portfolioData.personalInfo.links.forEach(link => {
+          const platform = link.platform.toLowerCase();
+          let url = '';
+          let iconClass = '';
+
+          if (platform === 'github') {
+            url = `https://github.com/${link.username}`;
+            iconClass = 'fab fa-github';
+          } else if (platform === 'linkedin') {
+            url = `https://linkedin.com/in/${link.username}`;
+            iconClass = 'fab fa-linkedin-in';
+          } else if (platform === 'portfolio') {
+            url = `https://${link.username}.github.io`;
+            iconClass = 'fas fa-globe';
+          }
+
+          if (url) {
+            socialLinksHtml += `
+              <a href="${url}" target="_blank" rel="noopener noreferrer" class="social-icon">
+                <i class="${iconClass}"></i>
+              </a>
+            `;
+          }
+        });
+      }
       heroSocialLinksContainer.innerHTML = socialLinksHtml;
     }
   }
@@ -540,6 +553,13 @@ function initThemeToggle() {
   const themeSwitch = document.getElementById('theme-switch');
   if (!themeSwitch) return;
 
+  // Ensure the theme toggle is visible
+  const themeToggleContainer = document.querySelector('.hero-theme-toggle');
+  if (themeToggleContainer) {
+    themeToggleContainer.style.visibility = 'visible';
+    themeToggleContainer.style.opacity = '1';
+  }
+
   const currentTheme = localStorage.getItem('theme');
   if (currentTheme) {
     document.documentElement.setAttribute('data-theme', currentTheme);
@@ -557,6 +577,24 @@ function initThemeToggle() {
       localStorage.setItem('theme', 'dark');
     }
   });
+}
+
+function initMobileMenuToggle() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const sidebar = document.getElementById('sidebar-nav');
+  const navLinks = document.querySelectorAll('#sidebar-nav .nav-links a');
+
+  if (menuToggle && sidebar) {
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+      });
+    });
+  }
 }
 
 // Smooth scroll for anchor links
