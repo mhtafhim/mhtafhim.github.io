@@ -11,6 +11,7 @@ const BLOG_PREVIEW_COUNT = 3; // Number of blog posts to show initially
 // Initialize when DOM is ready
 function initialize() {
   console.log('Initializing portfolio...');
+  applySystemTheme(); // Apply theme based on system settings
   initNavigation();
   initScrollHide();
   initMobileMenuToggle(); // Initialize mobile menu toggle
@@ -549,34 +550,17 @@ function showError(title, message) {
   container.appendChild(errorMsg);
 }
 
-function initThemeToggle() {
-  const themeSwitch = document.getElementById('theme-switch');
-  if (!themeSwitch) return;
+function applySystemTheme() {
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  const savedTheme = localStorage.getItem('theme');
 
-  // Ensure the theme toggle is visible
-  const themeToggleContainer = document.querySelector('.hero-theme-toggle');
-  if (themeToggleContainer) {
-    themeToggleContainer.style.visibility = 'visible';
-    themeToggleContainer.style.opacity = '1';
+  if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  } else if (prefersLight) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
   }
-
-  const currentTheme = localStorage.getItem('theme');
-  if (currentTheme) {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    if (currentTheme === 'light') {
-      themeSwitch.checked = true;
-    }
-  }
-
-  themeSwitch.addEventListener('change', function() {
-    if (this.checked) {
-      document.documentElement.setAttribute('data-theme', 'light');
-      localStorage.setItem('theme', 'light');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      localStorage.setItem('theme', 'dark');
-    }
-  });
 }
 
 function initMobileMenuToggle() {

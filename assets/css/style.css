@@ -4,7 +4,7 @@
 
 /* CSS Variables */
 :root {
-  /* Colors - Dark Theme */
+  /* Colors - Dark Theme (Default) */
   --bg-primary: #0a0a0a;
   --bg-secondary: #141414;
   --bg-card: rgba(255, 255, 255, 0.03);
@@ -35,17 +35,19 @@
 }
 
 /* Light Theme (optional toggle) */
-[data-theme="light"] {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f5f5f5;
-  --bg-card: rgba(0, 0, 0, 0.02);
-  --bg-glass: rgba(0, 0, 0, 0.03);
-  --text-primary: #1a1a1a;
-  --text-secondary: #4a4a4a;
-  --text-muted: #8a8a8a;
-  --border: rgba(0, 0, 0, 0.1);
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --bg-card: rgba(0, 0, 0, 0.02);
+    --bg-glass: rgba(0, 0, 0, 0.03);
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --text-muted: #8a8a8a;
+    --border: rgba(0, 0, 0, 0.1);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+  }
 }
 
 /* Reset & Base Styles */
@@ -108,15 +110,15 @@ a:hover {
 #sidebar-nav {
   position: fixed;
   left: 0;
-  top: 0;
+  top: 0; /* Reset top to 0 */
   bottom: 0;
   width: 250px;
   z-index: 1000;
   background: var(--bg-secondary);
   border-right: 1px solid var(--border);
   transition: transform 0.3s ease;
-  overflow-y: auto; /* Enable scrolling */
-  scrollbar-width: none;  /* Firefox */
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 
 #sidebar-nav::-webkit-scrollbar {
@@ -128,17 +130,48 @@ a:hover {
 }
 
 #sidebar-nav .nav-content {
-  padding: var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-md); 
   display: flex;
   flex-direction: column;
   height: 100%;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+  display: none; /* Hidden by default on larger screens */
+  position: fixed;
+  top: var(--spacing-md);
+  left: var(--spacing-md);
+  z-index: 1001;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 48px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.menu-toggle:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.05);
+}
+
+.menu-toggle i {
+  font-size: 1.5rem;
+  color: var(--text-primary);
 }
 
 .profile-logo {
   display: block;
-  width: 100px; /* Made slightly bigger */
-  height: 100px; /* Made slightly bigger */
-  margin: 0 auto var(--spacing-lg) auto;
+  width: 100px; 
+  height: 100px; 
+  margin: 0 auto var(--spacing-lg) auto; /* Keep horizontal centering, rely on parent padding for top spacing */
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid var(--accent);
@@ -178,7 +211,7 @@ a:hover {
   transition: var(--transition);
   text-align: left;
   background: var(--bg-card);
-  border: 1px solid var(--border);
+  border: none; /* Removed border */
   margin-bottom: var(--spacing-xs);
 }
 
@@ -187,18 +220,22 @@ a:hover {
   color: var(--accent);
   background: var(--bg-glass);
   transform: translateX(5px);
-  border-color: var(--accent);
+  border-color: transparent; /* Ensure no border on hover */
 }
 
 /* Main Content Wrapper */
 .main-content {
   margin-left: 250px;
-  transition: margin-left 0.3s ease;
+  transition: margin-left 0.3s ease, margin-right 0.3s ease, width 0.3s ease;
   min-height: 100vh;
+  width: calc(100% - 250px); /* Adjust width when sidebar is visible */
 }
 
 #sidebar-nav.hidden + .main-content {
-  margin-left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 1200px; /* Optional: Set a max-width for centered content */
 }
 
 /* Container */
@@ -742,6 +779,7 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  /* Adjustments for smaller screens */
   #sidebar-nav {
     width: 100%;
     transform: translateX(-100%);
@@ -755,6 +793,7 @@ footer {
     padding-top: var(--spacing-lg);
     justify-content: flex-start;
     text-align: center;
+    z-index: 1000; /* Ensure nav is on top */
   }
 
   #sidebar-nav.active {
@@ -763,54 +802,96 @@ footer {
 
   #sidebar-nav .nav-content {
     padding: var(--spacing-md) 0;
+    justify-content: center;
   }
 
   #sidebar-nav .nav-links {
     align-items: center;
+    width: 100%;
   }
 
   #sidebar-nav .nav-links a {
     text-align: center;
     width: 80%;
+    padding: var(--spacing-sm) var(--spacing-md);
   }
 
   .main-content {
     margin-left: 0;
+    width: 100%;
+    overflow-x: hidden;
+    transition: transform 0.3s ease; /* Add transition for content */
   }
 
-  .timeline::before {
-    left: 1rem;
+  #sidebar-nav.active + .main-content {
+    transform: translateX(100%); /* Push content to the right when nav is open */
   }
-  
+
+  .menu-toggle {
+    display: flex;
+    position: fixed;
+    top: var(--spacing-md);
+    left: var(--spacing-md);
+    z-index: 1002; /* Ensure toggle is above nav and content */
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .menu-toggle:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.05);
+  }
+
+  .menu-toggle i {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  body.no-scroll {
+    overflow: hidden;
+  }
+
+  .profile-logo {
+    margin-top: var(--spacing-lg);
+  }
+
+  .timeline::before,
   .timeline-item {
+    left: 1rem;
     padding-left: 3rem;
   }
-  
+
   .timeline-item::before {
     left: 0.5rem;
   }
-  
+
   .hero-section .cta-buttons {
     flex-direction: column;
   }
-  
+
   .btn {
     width: 100%;
     text-align: center;
   }
-  
+
   .projects-grid,
-  .blog-grid {
-    grid-template-columns: 1fr;
-  }
-  
+  .blog-grid,
   .skills-grid {
     grid-template-columns: 1fr;
   }
 
-  .menu-toggle {
-    display: block; /* Show hamburger menu */
+  .section {
+    padding: var(--spacing-md) 0; /* Adjust section padding for mobile */
   }
+
 }
 
 @media (max-width: 480px) {
@@ -829,6 +910,17 @@ footer {
   
   .timeline-item::before {
     left: 0.2rem;
+  }
+
+  .menu-toggle {
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
+    width: 40px;
+    height: 40px;
+  }
+
+  .menu-toggle i {
+    font-size: 1.2rem;
   }
 }
 

@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   loadBlogPost();
   initScrollHide();
   initNavigation();
-  initThemeToggle();
+  initMobileMenuToggle(); // Initialize mobile menu toggle
+  applySystemTheme(); // Apply theme based on system settings
 });
 
 /**
@@ -163,29 +164,33 @@ function showError(title, message) {
   container.appendChild(errorMsg);
 }
 
-/**
- * Initialize Dark/Light Theme Toggle
- */
-function initThemeToggle() {
-  const themeSwitch = document.getElementById('theme-switch');
-  if (!themeSwitch) return;
+function applySystemTheme() {
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  const savedTheme = localStorage.getItem('theme');
 
-  // Check for saved theme preference
-  const currentTheme = localStorage.getItem('theme');
-  if (currentTheme) {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    if (currentTheme === 'light') {
-      themeSwitch.checked = true;
-    }
+  if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  } else if (prefersLight) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
   }
+}
 
-  themeSwitch.addEventListener('change', function() {
-    if (this.checked) {
-      document.documentElement.setAttribute('data-theme', 'light');
-      localStorage.setItem('theme', 'light');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      localStorage.setItem('theme', 'dark');
-    }
-  });
+function initMobileMenuToggle() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const sidebar = document.getElementById('sidebar-nav');
+  const navLinks = document.querySelectorAll('#sidebar-nav .nav-links a');
+
+  if (menuToggle && sidebar) {
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+      });
+    });
+  }
 }
