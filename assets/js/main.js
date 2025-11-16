@@ -20,7 +20,6 @@ function showSidebarOnDesktop() {
 
 // Initialize when DOM is ready
 function initialize() {
-  console.log('Initializing portfolio...');
   applySystemTheme(); // Apply theme based on system settings
   showSidebarOnDesktop(); // Ensure sidebar is visible on desktop immediately
 
@@ -35,15 +34,12 @@ if (document.readyState === 'loading') {
 }
 
 async function loadAllData() {
-  console.log('loadAllData: Starting data loading...');
   try {
     const portfolioResponse = await fetchJsonWithRetry('data/my_information.json');
     portfolioData = portfolioResponse;
-    console.log('loadAllData: Portfolio data loaded successfully', portfolioData);
     
     const blogResponse = await fetchJsonWithRetry('data/posts.json');
     blogPostsData = blogResponse;
-    console.log('loadAllData: Blog posts data loaded successfully', blogPostsData);
 
     populateAllSections();
 
@@ -51,9 +47,6 @@ async function loadAllData() {
     console.error('loadAllData: Error loading essential data:', error);
     showError('Error loading website data.', error.message);
   }
-
-  console.log('loadAllData: Data loading completed');
-
 }
 
 // The fetchJsonWithRetry and showError functions will be moved/copied to blog.js and post.js as well.
@@ -110,13 +103,10 @@ function showError(title, message) {
 }
 
 function populateAllSections() {
-  console.log('populateAllSections: Checking portfolioData status.', 'Is portfolioData null?', portfolioData === null);
   if (!portfolioData) {
-    console.warn('populateAllSections: Portfolio data not loaded yet, retrying...');
     setTimeout(populateAllSections, 100);
     return;
   }
-  console.log('populateAllSections: Populating all sections with data...');
   populateHero();
   populateAbout();
   populateEducation();
@@ -129,16 +119,13 @@ function populateAllSections() {
   populateAchievements();
   populateBlogPreviews(); // Populate blog previews for homepage
   populateContact();
-  console.log('populateAllSections: All sections populated successfully');
 
   // Initialize DOM-dependent functions after all content has been populated
   // Use a setTimeout to ensure the DOM has fully rendered after innerHTML updates
   setTimeout(() => {
-    console.log('populateAllSections: Initializing navigation and other DOM-dependent features.');
     initNavigation();
     initScrollHide();
     initMobileMenuToggle(); // Initialize mobile menu toggle
-    console.log('populateAllSections: Navigation and other DOM-dependent features initialized successfully');
   }, 100); // Increased delay to 100ms to ensure DOM is fully ready
 }
 
@@ -169,22 +156,10 @@ function populateHero() {
       // Add other social links
       if (portfolioData.personalInfo.links) {
         portfolioData.personalInfo.links.forEach(link => {
-          const platform = link.platform.toLowerCase();
-          let url = '';
-          let iconClass = '';
+          const url = link.url || ''; // Use the provided URL
+          const iconClass = link.iconClass || ''; // Use iconClass directly from JSON
 
-          if (platform === 'github') {
-            url = `https://github.com/${link.username}`;
-            iconClass = 'fab fa-github';
-          } else if (platform === 'linkedin') {
-            url = `https://linkedin.com/in/${link.username}`;
-            iconClass = 'fab fa-linkedin-in';
-          } else if (platform === 'portfolio') {
-            url = `https://${link.username}.github.io`;
-            iconClass = 'fas fa-globe';
-          }
-
-          if (url) {
+          if (url && iconClass) {
             socialLinksHtml += `
               <a href="${url}" target="_blank" rel="noopener noreferrer" class="social-icon">
                 <i class="${iconClass}"></i>
@@ -427,7 +402,7 @@ function populateContact() {
   const contact = portfolioData.personalInfo.contact;
   const links = portfolioData.personalInfo.links;
   let html = '';
-  
+
   // Email
   html += `
     <a href="mailto:${contact.email}" class="contact-link">
@@ -435,41 +410,32 @@ function populateContact() {
       <span>${contact.email}</span>
     </a>
   `;
-  
+
   // Phone
-  html += `
-    <a href="tel:${contact.phone.replace(/\s/g, '')}" class="contact-link">
-      <span>📱</span>
-      <span>${contact.phone}</span>
-    </a>
-  `;
-  
+  if (contact.phone) {
+    html += `
+      <a href="tel:${contact.phone.replace(/\s/g, '')}" class="contact-link">
+        <span>📱</span>
+        <span>${contact.phone}</span>
+      </a>
+    `;
+  }
+
   // Social Links
-  links.forEach(link => {
-    const platform = link.platform.toLowerCase();
-    let url = '';
-    let icon = '🔗';
-    
-    if (platform === 'github') {
-      url = `https://github.com/${link.username}`;
-      icon = '💻';
-    } else if (platform === 'linkedin') {
-      url = `https://linkedin.com/in/${link.username}`;
-      icon = '💼';
-    } else if (platform === 'portfolio') {
-      url = `https://${link.username}.github.io`;
-      icon = '🌐';
-    }
-    
-    if (url) {
-      html += `
-        <a href="${url}" target="_blank" rel="noopener noreferrer" class="contact-link">
-          <span>${icon}</span>
-          <span>${link.platform}</span>
-        </a>
-      `;
-    }
-  });
+  if (links) {
+    links.forEach(link => {
+      const icon = link.iconClass || 'fas fa-link'; // Use iconClass directly from JSON, fallback to generic link icon
+
+      if (link.url && icon) {
+        html += `
+          <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <span><i class="${icon}"></i></span> <!-- Using Font Awesome icon -->
+            <span>${link.platform}</span>
+          </a>
+        `;
+      }
+    });
+  }
   
   contactContainer.innerHTML = html;
 }
@@ -556,7 +522,6 @@ function initScrollHide() {
 }
 
 function initNavigation() {
-  console.log('initNavigation: Initializing navigation...');
   const sections = document.querySelectorAll('.section');
   const navLinks = document.querySelectorAll('#sidebar-nav .nav-links a');
 
@@ -623,27 +588,35 @@ function initMobileMenuToggle() {
   const sidebar = document.getElementById('sidebar-nav');
   const navLinks = document.querySelectorAll('#sidebar-nav .nav-links a');
 
-  console.log('initMobileMenuToggle: menuToggle element:', menuToggle);
-  console.log('initMobileMenuToggle: sidebar element:', sidebar);
-
   if (menuToggle && sidebar) {
     menuToggle.addEventListener('click', () => {
-      console.log('menuToggle clicked!');
       sidebar.classList.toggle('active');
       document.body.classList.toggle('no-scroll'); // Toggle no-scroll class on body
-      console.log('sidebar active class toggled:', sidebar.classList.contains('active'));
-      console.log('body no-scroll class toggled:', document.body.classList.contains('no-scroll'));
     });
 
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
-        console.log('Nav link clicked:', link.getAttribute('href'));
         sidebar.classList.remove('active');
         document.body.classList.remove('no-scroll'); // Remove no-scroll class
-        console.log('sidebar active class removed after nav click:', sidebar.classList.contains('active'));
-        console.log('body no-scroll class removed after nav click:', document.body.classList.contains('no-scroll'));
       });
     });
+  }
+}
+
+// Helper function to get social icon class
+function getSocialIconClass(platform) {
+  switch (platform.toLowerCase()) {
+    case 'github':
+      return 'fab fa-github';
+    case 'linkedin':
+      return 'fab fa-linkedin-in';
+    case 'portfolio':
+      return 'fas fa-globe';
+    case 'twitter':
+        return 'fab fa-twitter';
+    // Add more platforms as needed
+    default:
+      return 'fas fa-link'; // Default icon for unknown platforms
   }
 }
 

@@ -1,6 +1,6 @@
 {
   "personalInfo": {
-    "name": "Mahmudul Haque",
+    "name": "Mahmudul Haque Tafhim",
     "location": "Rampura, Dhaka",
     "contact": {
       "email": "mahmudulhoquetafhim@gmail.com",
@@ -8,16 +8,29 @@
     },
     "links": [
       {
-        "platform": "Portfolio",
-        "username": "mh-tafhim"
+        "platform": "X",
+        "url": "https://x.com/mhtafhim/",
+        "iconClass": "fab fa-twitter"
       },
       {
         "platform": "LinkedIn",
-        "username": "mh-tafhim"
+        "url": "https://www.linkedin.com/in/mh-tafhim/",
+        "iconClass": "fab fa-linkedin-in"
       },
       {
         "platform": "GitHub",
-        "username": "mhtafhim"
+        "url": "https://github.com/mhtafhim",
+        "iconClass": "fab fa-github"
+      },
+      {
+        "platform": "Facebook",
+        "url": "https://facebook.com/mh-tafhim/",
+        "iconClass": "fab fa-facebook-f"
+      },
+      {
+        "platform": "Instagram",
+        "url": "https://www.instagram.com/mhtafhim/",
+        "iconClass": "fab fa-instagram"
       }
     ]
   },
