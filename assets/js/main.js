@@ -5,315 +5,213 @@
 
 // Global data storage
 let portfolioData = null;
+let blogPostsData = [];
+const BLOG_PREVIEW_COUNT = 3; // Number of blog posts to show initially
 
 // Initialize when DOM is ready
 function initialize() {
   console.log('Initializing portfolio...');
+  initThemeToggle();
   initNavigation();
-  initAnimations();
-  loadPortfolioData();
+  initScrollHide();
+  loadAllData();
 }
 
 // Wait for DOM to be ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initialize);
 } else {
-  // DOM is already loaded
   initialize();
 }
 
-/**
- * Load portfolio data from JSON file
- */
-async function loadPortfolioData() {
+async function loadAllData() {
   try {
-    // Try multiple path variations to handle different scenarios
-    const possiblePaths = [
-      'my information.json',
-      './my information.json',
-      encodeURI('my information.json'),
-      encodeURI('./my information.json')
-    ];
-    
-    let response = null;
-    let lastError = null;
-    
-    // Try each path until one works
-    for (const jsonPath of possiblePaths) {
-      try {
-        response = await fetch(jsonPath);
-        if (response.ok) {
-          console.log(`Successfully loaded JSON from: ${jsonPath}`);
-          break;
-        }
-      } catch (err) {
-        lastError = err;
-        console.warn(`Failed to load from ${jsonPath}:`, err);
-        continue;
-      }
-    }
-    
-    if (!response || !response.ok) {
-      throw new Error(`Failed to load JSON file. Last error: ${lastError?.message || 'Unknown error'}`);
-    }
-    
-    portfolioData = await response.json();
+    const portfolioResponse = await fetchJsonWithRetry('my information.json');
+    portfolioData = portfolioResponse;
     console.log('Portfolio data loaded successfully', portfolioData);
     
-    // Validate data structure
-    if (!portfolioData.personalInfo) {
-      throw new Error('Invalid JSON structure: personalInfo missing');
-    }
-    if (!portfolioData.technologiesAndSkills) {
-      console.warn('technologiesAndSkills missing in JSON');
-    }
-    if (!portfolioData.experience) {
-      console.warn('experience missing in JSON');
-    }
-    if (!portfolioData.projects) {
-      console.warn('projects missing in JSON');
-    }
-    
-    // Populate current page based on route
-    const path = window.location.pathname;
-    const currentPage = window.location.href;
-    const filename = window.location.pathname.split('/').pop() || '';
-    
-    // Determine which page we're on
-    if (filename === 'index.html' || filename === '' || path === '/' || path.endsWith('/') || currentPage.includes('index.html')) {
-      populateHomePage();
-    } else if (filename === 'about.html' || path.includes('about.html') || currentPage.includes('about.html')) {
-      populateAboutPage();
-    } else if (filename === 'projects.html' || path.includes('projects.html') || currentPage.includes('projects.html')) {
-      populateProjectsPage();
-    } else {
-      // Default to home page
-      populateHomePage();
-    }
+    const blogResponse = await fetchJsonWithRetry('data/posts.json');
+    blogPostsData = blogResponse;
+    console.log('Blog posts data loaded successfully', blogPostsData);
+
+    populateAllSections();
+
   } catch (error) {
-    console.error('Error loading portfolio data:', error);
-    
-    // Check if using file:// protocol (local file)
-    const isFileProtocol = window.location.protocol === 'file:';
-    let helpText = '';
-    
-    if (isFileProtocol) {
-      helpText = `
-        <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
-          <strong>Local File Detected:</strong> You're opening the file directly. 
-          Use a local server instead:
-        </p>
-        <p style="color: var(--text-muted); font-size: 0.75rem; margin-bottom: 0.5rem;">
-          • Python: <code style="background: var(--bg-glass); padding: 0.25rem 0.5rem; border-radius: 4px;">python -m http.server 8000</code>
-        </p>
-        <p style="color: var(--text-muted); font-size: 0.75rem; margin-bottom: 1rem;">
-          • Node.js: <code style="background: var(--bg-glass); padding: 0.25rem 0.5rem; border-radius: 4px;">npx http-server</code>
-        </p>
-      `;
-    } else {
-      helpText = `
-        <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
-          Make sure "my information.json" is in the root directory.
-        </p>
-      `;
-    }
-    
-    // Show error message on page
-    const errorMsg = document.createElement('div');
-    errorMsg.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); z-index: 9999; text-align: center; max-width: 600px; box-shadow: var(--shadow-lg);';
-    errorMsg.innerHTML = `
-      <h3 style="color: var(--accent); margin-bottom: 1rem;">Error Loading Data</h3>
-      <p style="color: var(--text-secondary); margin-bottom: 1rem;">${error.message}</p>
-      ${helpText}
-      <p style="color: var(--text-muted); font-size: 0.75rem;">Please check the browser console (F12) for more details.</p>
-      <button onclick="this.parentElement.remove()" style="margin-top: 1rem; padding: 0.5rem 1.5rem; background: var(--accent); border: none; border-radius: 6px; color: white; cursor: pointer;">Close</button>
-    `;
-    document.body.appendChild(errorMsg);
+    console.error('Error loading essential data:', error);
+    showError('Error loading website data.', error.message);
   }
 }
 
-/**
- * Initialize navigation menu
- */
-function initNavigation() {
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navLinks = document.querySelector('.nav-links');
+async function fetchJsonWithRetry(url) {
+  const possiblePaths = [
+    url,
+    `./${url}`,
+    encodeURI(url),
+    encodeURI(`./${url}`)
+  ];
   
-  if (menuToggle) {
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-  }
+  let response = null;
+  let lastError = null;
   
-  // Set active nav link
-  const currentPath = window.location.pathname;
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    const linkPath = link.getAttribute('href');
-    if (currentPath.includes(linkPath) || 
-        (currentPath === '/' && linkPath === 'index.html')) {
-      link.classList.add('active');
-    }
-  });
-  
-  // Close mobile menu on link click
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        navLinks.classList.remove('active');
-      }
-    });
-  });
-}
-
-/**
- * Initialize GSAP animations
- */
-function initAnimations() {
-  if (typeof gsap !== 'undefined') {
-    // Fade in elements on scroll
-    gsap.registerPlugin(ScrollTrigger);
-    
-    // Animate fade-in elements
-    gsap.utils.toArray('.fade-in').forEach((element) => {
-      // Check if element is already in view
-      const rect = element.getBoundingClientRect();
-      const isInView = rect.top < window.innerHeight * 0.8;
-      
-      if (isInView) {
-        // Element is already visible, animate immediately
-        gsap.fromTo(element, 
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8 }
-        );
+  for (const path of possiblePaths) {
+    try {
+      const res = await fetch(path);
+      if (res.ok) {
+        console.log(`Successfully loaded from: ${path}`);
+        return await res.json();
       } else {
-        // Element is below, animate on scroll
-        gsap.set(element, { opacity: 0, y: 30 });
-        gsap.to(element, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: element,
-            start: 'top 80%',
-            toggleActions: 'play none none none'
-          }
-        });
+        lastError = new Error(`HTTP error! status: ${res.status} from ${path}`);
       }
-    });
-    
-    // Stagger animations for grids
-    gsap.utils.toArray('.skills-grid, .projects-grid, .timeline-item').forEach((container) => {
-      const items = container.querySelectorAll('.skill-category, .project-card, .timeline-content');
-      if (items.length > 0) {
-        const rect = container.getBoundingClientRect();
-        const isInView = rect.top < window.innerHeight * 0.8;
-        
-        if (isInView) {
-          // Animate immediately
-          gsap.fromTo(items,
-            { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 0.6, stagger: 0.1 }
-          );
-        } else {
-          // Animate on scroll
-          gsap.set(items, { opacity: 0, y: 30 });
-          gsap.to(items, {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.1,
-            scrollTrigger: {
-              trigger: container,
-              start: 'top 80%',
-              toggleActions: 'play none none none'
-            }
-          });
-        }
-      }
-    });
-  } else {
-    // If GSAP doesn't load, ensure all elements are visible
-    console.warn('GSAP not loaded, showing all elements without animation');
-    document.querySelectorAll('.fade-in').forEach(el => {
-      el.style.opacity = '1';
-      el.style.transform = 'translateY(0)';
-    });
+    } catch (err) {
+      lastError = err;
+      console.warn(`Failed to load from ${path}:`, err);
+    }
   }
+  throw new Error(`Failed to load JSON file (${url}). Last error: ${lastError?.message || 'Unknown error'}`);
 }
 
-/**
- * Populate home page with data
- */
-function populateHomePage() {
+function populateAllSections() {
   if (!portfolioData) {
-    console.warn('Portfolio data not loaded yet, retrying...');
-    // Retry after a short delay
-    setTimeout(() => {
-      if (portfolioData) {
-        populateHomePage();
-      }
-    }, 100);
+    console.warn('Portfolio data not loaded yet for sections, retrying...');
+    setTimeout(populateAllSections, 100);
     return;
   }
-  
-  console.log('Populating home page...');
-  const data = portfolioData;
-  
-  // Hero Section
-  const heroName = document.querySelector('.hero h1');
-  const heroTagline = document.querySelector('.hero .tagline');
-  if (heroName) heroName.textContent = data.personalInfo.name;
-  if (heroTagline) {
-    heroTagline.textContent = `Software Engineer & Problem Solver | ${data.personalInfo.location}`;
-  }
-  
-  // Skills Section
+  console.log('Populating all sections...');
+  populateHero();
+  populateAbout();
+  populateEducation();
+  populateResearch();
+  populateOtherExperiences();
   populateSkills();
-  
-  // Experience Section
-  populateExperience();
-  
-  // Projects Section
-  populateProjects();
-  
-  // Achievements Section
-  populateAchievements();
-  
-  // Contact Section
-  populateContact();
-  
-  // Problem Solving Section
   populateProblemSolving();
-  
-  console.log('Home page populated successfully');
+  populateExperience();
+  populateProjects();
+  populateAchievements();
+  populateBlogPreviews(); // Populate blog previews for homepage
+  populateContact();
+  console.log('All sections populated successfully');
 }
 
-/**
- * Populate skills section
- */
+function populateHero() {
+  const heroName = document.getElementById('hero-name');
+  const heroTagline = document.getElementById('hero-tagline');
+  const heroSocialLinksContainer = document.querySelector('.hero-social-links');
+
+  if (portfolioData.personalInfo) {
+    if (heroName) heroName.textContent = portfolioData.personalInfo.name;
+    if (heroTagline) heroTagline.textContent = `Software Engineer & Problem Solver | ${portfolioData.personalInfo.location}`;
+
+    if (heroSocialLinksContainer && portfolioData.personalInfo.links) {
+      let socialLinksHtml = '';
+      portfolioData.personalInfo.links.forEach(link => {
+        const platform = link.platform.toLowerCase();
+        let url = '';
+        let iconClass = '';
+
+        if (platform === 'github') {
+          url = `https://github.com/${link.username}`;
+          iconClass = 'fab fa-github';
+        } else if (platform === 'linkedin') {
+          url = `https://linkedin.com/in/${link.username}`;
+          iconClass = 'fab fa-linkedin-in';
+        } else if (platform === 'portfolio') {
+          url = `https://${link.username}.github.io`;
+          iconClass = 'fas fa-globe';
+        } else if (platform === 'email') {
+          url = `mailto:${portfolioData.personalInfo.contact.email}`;
+          iconClass = 'fas fa-envelope';
+        }
+
+        if (url) {
+          socialLinksHtml += `
+            <a href="${url}" target="_blank" rel="noopener noreferrer" class="social-icon">
+              <i class="${iconClass}"></i>
+            </a>
+          `;
+        }
+      });
+      heroSocialLinksContainer.innerHTML = socialLinksHtml;
+    }
+  }
+}
+
+function populateAbout() {
+  const aboutBioTagline = document.getElementById('about-bio-tagline');
+  if (aboutBioTagline) {
+    aboutBioTagline.textContent = "I am a passionate Software Engineer with a strong foundation in data structures, algorithms, and object-oriented programming. I enjoy solving complex problems and building innovative solutions.";
+  }
+}
+
+function populateEducation() {
+  const educationContainer = document.getElementById('education-container');
+  if (!educationContainer || !portfolioData.education) return;
+  
+  let html = '';
+  portfolioData.education.forEach(edu => {
+    html += `
+      <div class="card">
+        <h3>${edu.degree}</h3>
+        <div class="company">${edu.institution}</div>
+        <div class="meta">${edu.duration} • GPA: ${edu.gpa}</div>
+        <div class="skills" style="margin-top: 1rem;">
+          <strong>Key Coursework:</strong>
+          <div class="skill-tags" style="margin-top: 0.5rem;">
+            ${edu.coursework.map(course => `<span class="skill-tag">${course}</span>`).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  educationContainer.innerHTML = html;
+}
+
+function populateResearch() {
+  const researchContainer = document.getElementById('research-container');
+  if (!researchContainer || !portfolioData.researchAndThesis) return;
+  
+  const research = portfolioData.researchAndThesis;
+  let html = `
+    <div class="card">
+      <h3>${research.title}</h3>
+      <ul style="list-style: none; padding-left: 0;">
+        ${research.points.map(point => `<li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0;">•</span>
+          ${point}
+        </li>`).join('')}
+      </ul>
+    </div>
+  `;
+  researchContainer.innerHTML = html;
+}
+
+function populateOtherExperiences() {
+  const otherExpContainer = document.getElementById('other-experiences-container');
+  if (!otherExpContainer || !portfolioData.otherExperiences) return;
+  
+  let html = '';
+  portfolioData.otherExperiences.forEach(exp => {
+    const title = exp.event || exp.organization || '';
+    html += `
+      <div class="card">
+        <h3>${exp.role}</h3>
+        <div class="company">${title}</div>
+      </div>
+    `;
+  });
+  otherExpContainer.innerHTML = html;
+}
+
 function populateSkills() {
   const skillsContainer = document.getElementById('skills-container');
-  if (!skillsContainer) {
-    console.warn('Skills container not found');
-    return;
-  }
-  if (!portfolioData) {
-    console.warn('Portfolio data not available for skills');
-    return;
-  }
+  if (!skillsContainer || !portfolioData.technologiesAndSkills) return;
   
   const skills = portfolioData.technologiesAndSkills;
-  if (!skills) {
-    console.warn('Skills data not found in portfolio data');
-    return;
-  }
-  
   let html = '';
   
   Object.keys(skills).forEach(category => {
     const categoryName = category.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
     html += `
-      <div class="skill-category fade-in">
+      <div class="skill-category">
         <h3>${categoryName}</h3>
         <div class="skill-tags">
           ${skills[category].map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
@@ -323,15 +221,11 @@ function populateSkills() {
   });
   
   skillsContainer.innerHTML = html;
-  console.log('Skills populated');
 }
 
-/**
- * Populate experience timeline
- */
 function populateExperience() {
   const experienceContainer = document.getElementById('experience-container');
-  if (!experienceContainer || !portfolioData) return;
+  if (!experienceContainer || !portfolioData.experience) return;
   
   const experiences = portfolioData.experience;
   let html = '';
@@ -343,7 +237,7 @@ function populateExperience() {
       </div>` : '';
     
     html += `
-      <div class="timeline-item fade-in">
+      <div class="timeline-item">
         <div class="timeline-content">
           <h3>${exp.title}</h3>
           <div class="company">${exp.company}</div>
@@ -359,29 +253,49 @@ function populateExperience() {
   experienceContainer.innerHTML = html;
 }
 
-/**
- * Populate projects section
- */
 function populateProjects() {
   const projectsContainer = document.getElementById('projects-container');
-  if (!projectsContainer || !portfolioData) return;
+  if (!projectsContainer || !portfolioData.projects) return;
   
   const projects = portfolioData.projects;
   let html = '';
   
+  if (portfolioData.researchAndThesis) {
+    const research = portfolioData.researchAndThesis;
+    html += `
+      <div class="project-card">
+        <h3>${research.title}</h3>
+        <div class="tech-stack">
+          <span class="tech-tag">Deep Reinforcement Learning</span>
+          <span class="tech-tag">PyTorch</span>
+          <span class="tech-tag">SUMO</span>
+          <span class="tech-tag">Python</span>
+        </div>
+        <div class="description">
+          <ul style="list-style: none; padding-left: 0;">
+            ${research.points.map(point => `<li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+              <span style="position: absolute; left: 0;">•</span>
+              ${point}
+            </li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    `;
+  }
+
   projects.forEach(project => {
     const description = Array.isArray(project.description) 
-      ? project.description.join(' ') 
+      ? project.description.join(' <br> ') 
       : project.description;
     
     html += `
-      <div class="project-card fade-in">
+      <div class="project-card">
         <h3>${project.title}</h3>
         <div class="tech-stack">
           ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
         </div>
         <p class="description">${description}</p>
-        <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="project-link">
+        <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="btn">
           View Project →
         </a>
       </div>
@@ -391,19 +305,16 @@ function populateProjects() {
   projectsContainer.innerHTML = html;
 }
 
-/**
- * Populate achievements section
- */
 function populateAchievements() {
   const achievementsContainer = document.getElementById('achievements-container');
-  if (!achievementsContainer || !portfolioData) return;
+  if (!achievementsContainer || !portfolioData.achievements) return;
   
   const achievements = portfolioData.achievements;
   let html = '';
   
   achievements.forEach(achievement => {
     html += `
-      <div class="achievement-item fade-in">
+      <div class="achievement-item">
         <div>${achievement}</div>
       </div>
     `;
@@ -413,11 +324,42 @@ function populateAchievements() {
 }
 
 /**
- * Populate contact section
+ * Populate blog section with previews (for index.html)
  */
+function populateBlogPreviews() {
+  const container = document.getElementById('blog-container');
+  if (!container || !blogPostsData) return;
+
+  // Sort by date (newest first)
+  const sortedPosts = [...blogPostsData].sort((a, b) => {
+    return new Date(b.date) - new Date(a.date);
+  });
+
+  const postsToDisplay = sortedPosts.slice(0, BLOG_PREVIEW_COUNT);
+
+  let html = '';
+  if (postsToDisplay.length === 0) {
+    html = '<p style="text-align: center; color: var(--text-muted);">No blog posts available yet. Check back soon!</p>';
+  } else {
+    postsToDisplay.forEach(post => {
+      html += `
+        <div class="blog-card" onclick="window.location.href='post.html?slug=${post.slug}'">
+          ${post.cover ? `<img src="${post.cover}" alt="${post.title}" class="cover" onerror="this.style.display='none'">` : ''}
+          <div class="content">
+            <h3>${post.title}</h3>
+            <div class="date">${formatDate(post.date)}</div>
+            <p class="summary">${post.short || ''}</p>
+          </div>
+        </div>
+      `;
+    });
+  }
+  container.innerHTML = html;
+}
+
 function populateContact() {
   const contactContainer = document.getElementById('contact-container');
-  if (!contactContainer || !portfolioData) return;
+  if (!contactContainer || !portfolioData.personalInfo || !portfolioData.personalInfo.contact || !portfolioData.personalInfo.links) return;
   
   const contact = portfolioData.personalInfo.contact;
   const links = portfolioData.personalInfo.links;
@@ -425,7 +367,7 @@ function populateContact() {
   
   // Email
   html += `
-    <a href="mailto:${contact.email}" class="contact-link fade-in">
+    <a href="mailto:${contact.email}" class="contact-link">
       <span>📧</span>
       <span>${contact.email}</span>
     </a>
@@ -433,7 +375,7 @@ function populateContact() {
   
   // Phone
   html += `
-    <a href="tel:${contact.phone.replace(/\s/g, '')}" class="contact-link fade-in">
+    <a href="tel:${contact.phone.replace(/\s/g, '')}" class="contact-link">
       <span>📱</span>
       <span>${contact.phone}</span>
     </a>
@@ -458,7 +400,7 @@ function populateContact() {
     
     if (url) {
       html += `
-        <a href="${url}" target="_blank" rel="noopener noreferrer" class="contact-link fade-in">
+        <a href="${url}" target="_blank" rel="noopener noreferrer" class="contact-link">
           <span>${icon}</span>
           <span>${link.platform}</span>
         </a>
@@ -469,19 +411,16 @@ function populateContact() {
   contactContainer.innerHTML = html;
 }
 
-/**
- * Populate problem solving section
- */
 function populateProblemSolving() {
   const problemSolvingContainer = document.getElementById('problem-solving-container');
-  if (!problemSolvingContainer || !portfolioData) return;
+  if (!problemSolvingContainer || !portfolioData.problemSolving) return;
   
   const platforms = portfolioData.problemSolving;
   let html = '';
   
   platforms.forEach(platform => {
     html += `
-      <div class="problem-solving-card fade-in">
+      <div class="problem-solving-card">
         <h3>${platform.platform}</h3>
         <p>${platform.details}</p>
         <a href="${platform.link}" target="_blank" rel="noopener noreferrer" class="btn">
@@ -494,119 +433,146 @@ function populateProblemSolving() {
   problemSolvingContainer.innerHTML = html;
 }
 
-/**
- * Populate about page
- */
-function populateAboutPage() {
-  if (!portfolioData) return;
-  
-  const data = portfolioData;
-  
-  // Education
-  const educationContainer = document.getElementById('education-container');
-  if (educationContainer && data.education) {
-    let html = '';
-    data.education.forEach(edu => {
-      html += `
-        <div class="card fade-in">
-          <h3>${edu.degree}</h3>
-          <div class="company">${edu.institution}</div>
-          <div class="meta">${edu.duration} • GPA: ${edu.gpa}</div>
-          <div class="skills" style="margin-top: 1rem;">
-            <strong>Key Coursework:</strong>
-            <div class="skill-tags" style="margin-top: 0.5rem;">
-              ${edu.coursework.map(course => `<span class="skill-tag">${course}</span>`).join('')}
-            </div>
-          </div>
-        </div>
-      `;
-    });
-    educationContainer.innerHTML = html;
-  }
-  
-  // Research & Thesis
-  const researchContainer = document.getElementById('research-container');
-  if (researchContainer && data.researchAndThesis) {
-    const research = data.researchAndThesis;
-    let html = `
-      <div class="card fade-in">
-        <h3>${research.title}</h3>
-        <ul style="list-style: none; padding-left: 0;">
-          ${research.points.map(point => `<li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
-            <span style="position: absolute; left: 0;">•</span>
-            ${point}
-          </li>`).join('')}
-        </ul>
-      </div>
-    `;
-    researchContainer.innerHTML = html;
-  }
-  
-  // Other Experiences
-  const otherExpContainer = document.getElementById('other-experiences-container');
-  if (otherExpContainer && data.otherExperiences) {
-    let html = '';
-    data.otherExperiences.forEach(exp => {
-      const title = exp.event || exp.organization || '';
-      html += `
-        <div class="card fade-in">
-          <h3>${exp.role}</h3>
-          <div class="company">${title}</div>
-        </div>
-      `;
-    });
-    otherExpContainer.innerHTML = html;
-  }
-  
-  // Populate skills and experience on about page too
-  populateSkills();
-  populateExperience();
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
 }
 
-/**
- * Populate projects page
- */
-function populateProjectsPage() {
-  populateProjects();
+function initScrollHide() {
+  const sidebar = document.getElementById('sidebar-nav');
+  if (!sidebar) return;
   
-  // Also show research project
-  const projectsContainer = document.getElementById('projects-container');
-  if (projectsContainer && portfolioData && portfolioData.researchAndThesis) {
-    const research = portfolioData.researchAndThesis;
-    const html = `
-      <div class="project-card fade-in">
-        <h3>${research.title}</h3>
-        <div class="tech-stack">
-          <span class="tech-tag">Deep Reinforcement Learning</span>
-          <span class="tech-tag">PyTorch</span>
-          <span class="tech-tag">SUMO</span>
-          <span class="tech-tag">Python</span>
-        </div>
-        <div class="description">
-          <ul style="list-style: none; padding-left: 0;">
-            ${research.points.map(point => `<li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
-              <span style="position: absolute; left: 0;">•</span>
-              ${point}
-            </li>`).join('')}
-          </ul>
-        </div>
-      </div>
-    `;
-    projectsContainer.insertAdjacentHTML('beforeend', html);
+  let lastScrollTop = 0;
+  let scrollTimeout;
+  
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    clearTimeout(scrollTimeout);
+    
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+      sidebar.classList.add('hidden');
+    } 
+    else if (scrollTop < lastScrollTop || scrollTop <= 100) {
+      sidebar.classList.remove('hidden');
+    }
+    
+    lastScrollTop = scrollTop;
+    
+    scrollTimeout = setTimeout(() => {
+      sidebar.classList.remove('hidden');
+    }, 1500);
+  });
+  
+  document.addEventListener('mousemove', (e) => {
+    if (e.clientX < 50) {
+      sidebar.classList.remove('hidden');
+    }
+  });
+}
+
+function initNavigation() {
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('#sidebar-nav .nav-links a');
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.7 
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const currentSectionId = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          // Only set active if it's an internal link to a section on this page
+          if (link.getAttribute('href') === `#${currentSectionId}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+
+  // Handle initial active link on load
+  const currentHash = window.location.hash;
+  const currentPath = window.location.pathname.split('/').pop();
+  if (currentHash) {
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentHash) {
+        link.classList.add('active');
+      }
+    });
+  } else if (currentPath === 'index.html' || currentPath === '') {
+    // Default to home if no hash and on index.html
+    document.querySelector('#sidebar-nav .nav-links a[href="#home"]').classList.add('active');
   }
+}
+
+function showError(title, message) {
+  const container = document.querySelector('.main-content') || document.body;
+  const errorMsg = document.createElement('div');
+  errorMsg.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); z-index: 9999; text-align: center; max-width: 600px; box-shadow: var(--shadow-lg);';
+  errorMsg.innerHTML = `
+    <h3 style="color: var(--accent); margin-bottom: 1rem;">${title}</h3>
+    <p style="color: var(--text-secondary); margin-bottom: 1rem;">${message}</p>
+    <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
+      Make sure your JSON files (my information.json, data/posts.json) are correctly located 
+      and accessible.
+    </p>
+    <p style="color: var(--text-muted); font-size: 0.75rem;">Please check the browser console (F12) for more details.</p>
+    <button onclick="this.parentElement.remove()" style="margin-top: 1rem; padding: 0.5rem 1.5rem; background: var(--accent); border: none; border-radius: 6px; color: white; cursor: pointer;">Close</button>
+  `;
+  container.appendChild(errorMsg);
+}
+
+function initThemeToggle() {
+  const themeSwitch = document.getElementById('theme-switch');
+  if (!themeSwitch) return;
+
+  const currentTheme = localStorage.getItem('theme');
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    if (currentTheme === 'light') {
+      themeSwitch.checked = true;
+    }
+  }
+
+  themeSwitch.addEventListener('change', function() {
+    if (this.checked) {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  });
 }
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({
+    const targetId = this.getAttribute('href').substring(1);
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      targetElement.scrollIntoView({
         behavior: 'smooth',
         block: 'start'
       });
+
+      window.history.pushState(null, '', `#${targetId}`);
     }
   });
 });
-

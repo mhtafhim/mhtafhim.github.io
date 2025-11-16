@@ -6,54 +6,61 @@
   <meta name="description" content="Blog by Mahmudul Haque - Software Engineer">
   <title>Blog | Mahmudul Haque</title>
   
-  <!-- GSAP Animation Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  
   <!-- Styles -->
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <!-- Navigation -->
-  <nav>
-    <div class="nav-container">
+  <!-- Left Sidebar Navigation -->
+  <nav id="sidebar-nav">
+    <div class="nav-content">
       <a href="index.html" class="logo">MH</a>
-      <button class="menu-toggle" aria-label="Toggle menu">☰</button>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="projects.html">Projects</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#achievements">Achievements</a></li>
         <li><a href="blog.html">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
   </nav>
-
-  <!-- Blog Hero -->
-  <section class="hero" style="min-height: 60vh;">
-    <div class="hero-content">
-      <h1 class="fade-in">Blog</h1>
-      <p class="tagline fade-in">Thoughts, tutorials, and insights on software engineering</p>
-    </div>
-  </section>
-
-  <!-- Blog Posts Section -->
-  <section id="blog" class="section">
-    <div class="container">
-      <div id="blog-container" class="blog-grid">
-        <!-- Populated by JavaScript -->
+  
+  <!-- Main Content Wrapper -->
+  <div class="main-content">
+    <!-- Blog Hero -->
+    <section class="hero" style="min-height: 40vh;">
+      <div class="hero-content">
+        <h1>All Blog Posts</h1>
+        <p class="tagline">Thoughts, tutorials, and insights on software engineering</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Mahmudul Haque. All rights reserved.</p>
-    </div>
-  </footer>
+    <!-- Blog Posts Section -->
+    <section id="blog-list" class="section">
+      <div class="container">
+        <div id="blog-container" class="blog-grid">
+          <!-- Populated by assets/js/blog.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Mahmudul Haque. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Theme Toggle -->
+  <div class="theme-toggle">
+    <input type="checkbox" id="theme-switch" />
+    <label for="theme-switch"></label>
+  </div>
 
   <!-- Scripts -->
   <script src="assets/js/blog.js"></script>
 </body>
 </html>
-

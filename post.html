@@ -6,52 +6,59 @@
   <meta name="description" content="Blog Post by Mahmudul Haque">
   <title>Blog Post | Mahmudul Haque</title>
   
-  <!-- GSAP Animation Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  
   <!-- Styles -->
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <!-- Navigation -->
-  <nav>
-    <div class="nav-container">
+  <!-- Left Sidebar Navigation -->
+  <nav id="sidebar-nav">
+    <div class="nav-content">
       <a href="index.html" class="logo">MH</a>
-      <button class="menu-toggle" aria-label="Toggle menu">☰</button>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="projects.html">Projects</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#achievements">Achievements</a></li>
         <li><a href="blog.html">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
   </nav>
+  
+  <!-- Main Content Wrapper -->
+  <div class="main-content">
+    <!-- Blog Post -->
+    <article class="blog-post-page section">
+      <div class="container">
+        <div id="blog-post-header" class="blog-post-header">
+          <!-- Populated by assets/js/post.js -->
+        </div>
+        <div id="blog-post-content" class="blog-post-content">
+          <!-- Populated by assets/js/post.js -->
+        </div>
+        <div class="text-center mt-lg">
+          <a href="blog.html" class="btn btn-primary">← Back to All Blogs</a>
+        </div>
+      </div>
+    </article>
 
-  <!-- Blog Post -->
-  <article class="blog-post">
-    <div class="container">
-      <div id="blog-post-header" class="blog-post-header">
-        <!-- Populated by JavaScript -->
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Mahmudul Haque. All rights reserved.</p>
       </div>
-      <div id="blog-post-content" class="blog-post-content">
-        <!-- Populated by JavaScript -->
-      </div>
-      <div style="text-align: center; margin-top: 3rem;">
-        <a href="blog.html" class="btn btn-primary">← Back to Blog</a>
-      </div>
-    </div>
-  </article>
+    </footer>
+  </div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Mahmudul Haque. All rights reserved.</p>
-    </div>
-  </footer>
+  <!-- Theme Toggle -->
+  <div class="theme-toggle">
+    <input type="checkbox" id="theme-switch" />
+    <label for="theme-switch"></label>
+  </div>
 
   <!-- Scripts -->
   <script src="assets/js/post.js"></script>
 </body>
 </html>
-

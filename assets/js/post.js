@@ -7,7 +7,63 @@ let blogPosts = [];
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
   loadBlogPost();
+  initScrollHide();
+  initNavigation();
+  initThemeToggle();
 });
+
+/**
+ * Initialize navigation menu
+ */
+function initNavigation() {
+  const currentPath = window.location.pathname;
+  const filename = currentPath.split('/').pop() || '';
+  
+  document.querySelectorAll('#sidebar-nav .nav-links a').forEach(link => {
+    const linkPath = link.getAttribute('href');
+    if (filename === linkPath || 
+        (filename === '' && linkPath === 'index.html') ||
+        (filename === 'blog.html' && linkPath === 'blog.html')) {
+      link.classList.add('active');
+    }
+  });
+}
+
+/**
+ * Initialize scroll hide behavior for navbar
+ */
+function initScrollHide() {
+  const sidebar = document.getElementById('sidebar-nav');
+  if (!sidebar) return;
+  
+  let lastScrollTop = 0;
+  let scrollTimeout;
+  
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    clearTimeout(scrollTimeout);
+    
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+      sidebar.classList.add('hidden');
+    } 
+    else if (scrollTop < lastScrollTop || scrollTop <= 100) {
+      sidebar.classList.remove('hidden');
+    }
+    
+    lastScrollTop = scrollTop;
+    
+    scrollTimeout = setTimeout(() => {
+      sidebar.classList.remove('hidden');
+    }, 1500);
+  });
+  
+  document.addEventListener('mousemove', (e) => {
+    if (e.clientX < 50) {
+      sidebar.classList.remove('hidden');
+    }
+  });
+}
 
 /**
  * Load and display blog post
@@ -19,7 +75,7 @@ async function loadBlogPost() {
     const slug = urlParams.get('slug');
     
     if (!slug) {
-      showError('No blog post specified.');
+      showError('No blog post specified.', 'Please navigate from the blog listing page.');
       return;
     }
     
@@ -31,18 +87,15 @@ async function loadBlogPost() {
     const post = blogPosts.find(p => p.slug === slug);
     
     if (!post) {
-      showError('Blog post not found.');
+      showError('Blog post not found.', `No post found with slug: "${slug}".`);
       return;
     }
     
     // Render the post
     renderBlogPost(post);
-    
-    // Initialize animations
-    initAnimations();
   } catch (error) {
     console.error('Error loading blog post:', error);
-    showError('Error loading blog post. Please try again later.');
+    showError('Error loading blog post.', error.message);
   }
 }
 
@@ -95,36 +148,44 @@ function formatDate(dateString) {
 }
 
 /**
- * Show error message
+ * Show error message on page
  */
-function showError(message) {
-  const container = document.querySelector('.blog-post') || document.body;
-  container.innerHTML = `
-    <div style="text-align: center; padding: 4rem 2rem;">
-      <h2 style="color: var(--accent); margin-bottom: 1rem;">Oops!</h2>
-      <p style="color: var(--text-secondary); margin-bottom: 2rem;">${message}</p>
-      <a href="blog.html" class="btn btn-primary">Back to Blog</a>
-    </div>
+function showError(title, message) {
+  const container = document.querySelector('.main-content') || document.body;
+  const errorMsg = document.createElement('div');
+  errorMsg.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); z-index: 9999; text-align: center; max-width: 600px; box-shadow: var(--shadow-lg);';
+  errorMsg.innerHTML = `
+    <h3 style="color: var(--accent); margin-bottom: 1rem;">${title}</h3>
+    <p style="color: var(--text-secondary); margin-bottom: 1rem;">${message}</p>
+    <p style="color: var(--text-muted); font-size: 0.75rem;">Please check the browser console (F12) for more details.</p>
+    <button onclick="this.parentElement.remove()" style="margin-top: 1rem; padding: 0.5rem 1.5rem; background: var(--accent); border: none; border-radius: 6px; color: white; cursor: pointer;">Close</button>
   `;
+  container.appendChild(errorMsg);
 }
 
 /**
- * Initialize animations
+ * Initialize Dark/Light Theme Toggle
  */
-function initAnimations() {
-  if (typeof gsap !== 'undefined') {
-    gsap.from('#blog-post-header', {
-      opacity: 0,
-      y: 30,
-      duration: 0.8
-    });
-    
-    gsap.from('#blog-post-content', {
-      opacity: 0,
-      y: 30,
-      duration: 0.8,
-      delay: 0.2
-    });
-  }
-}
+function initThemeToggle() {
+  const themeSwitch = document.getElementById('theme-switch');
+  if (!themeSwitch) return;
 
+  // Check for saved theme preference
+  const currentTheme = localStorage.getItem('theme');
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    if (currentTheme === 'light') {
+      themeSwitch.checked = true;
+    }
+  }
+
+  themeSwitch.addEventListener('change', function() {
+    if (this.checked) {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+}

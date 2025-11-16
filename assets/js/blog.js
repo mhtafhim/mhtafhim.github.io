@@ -7,8 +7,63 @@ let blogPosts = [];
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
   loadBlogPosts();
-  initAnimations();
+  initScrollHide();
+  initNavigation();
+  initThemeToggle();
 });
+
+/**
+ * Initialize navigation menu
+ */
+function initNavigation() {
+  const currentPath = window.location.pathname;
+  const filename = currentPath.split('/').pop() || '';
+  
+  document.querySelectorAll('#sidebar-nav .nav-links a').forEach(link => {
+    const linkPath = link.getAttribute('href');
+    if (filename === linkPath || 
+        (filename === '' && linkPath === 'index.html') ||
+        (filename === 'blog.html' && linkPath === 'blog.html')) {
+      link.classList.add('active');
+    }
+  });
+}
+
+/**
+ * Initialize scroll hide behavior for navbar
+ */
+function initScrollHide() {
+  const sidebar = document.getElementById('sidebar-nav');
+  if (!sidebar) return;
+  
+  let lastScrollTop = 0;
+  let scrollTimeout;
+  
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    clearTimeout(scrollTimeout);
+    
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+      sidebar.classList.add('hidden');
+    } 
+    else if (scrollTop < lastScrollTop || scrollTop <= 100) {
+      sidebar.classList.remove('hidden');
+    }
+    
+    lastScrollTop = scrollTop;
+    
+    scrollTimeout = setTimeout(() => {
+      sidebar.classList.remove('hidden');
+    }, 1500);
+  });
+  
+  document.addEventListener('mousemove', (e) => {
+    if (e.clientX < 50) {
+      sidebar.classList.remove('hidden');
+    }
+  });
+}
 
 /**
  * Load blog posts from JSON
@@ -47,7 +102,7 @@ function renderBlogPosts() {
   let html = '';
   sortedPosts.forEach(post => {
     html += `
-      <div class="blog-card fade-in" onclick="openBlogPost('${post.slug}')">
+      <div class="blog-card" onclick="window.location.href='post.html?slug=${post.slug}'">
         ${post.cover ? `<img src="${post.cover}" alt="${post.title}" class="cover" onerror="this.style.display='none'">` : ''}
         <div class="content">
           <h3>${post.title}</h3>
@@ -59,13 +114,6 @@ function renderBlogPosts() {
   });
   
   container.innerHTML = html;
-}
-
-/**
- * Open a blog post
- */
-function openBlogPost(slug) {
-  window.location.href = `post.html?slug=${slug}`;
 }
 
 /**
@@ -81,25 +129,28 @@ function formatDate(dateString) {
 }
 
 /**
- * Initialize animations
+ * Initialize Dark/Light Theme Toggle
  */
-function initAnimations() {
-  if (typeof gsap !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
-    
-    gsap.utils.toArray('.blog-card').forEach((card, index) => {
-      gsap.from(card, {
-        opacity: 0,
-        y: 30,
-        duration: 0.6,
-        delay: index * 0.1,
-        scrollTrigger: {
-          trigger: card,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
-      });
-    });
-  }
-}
+function initThemeToggle() {
+  const themeSwitch = document.getElementById('theme-switch');
+  if (!themeSwitch) return;
 
+  // Check for saved theme preference
+  const currentTheme = localStorage.getItem('theme');
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    if (currentTheme === 'light') {
+      themeSwitch.checked = true;
+    }
+  }
+
+  themeSwitch.addEventListener('change', function() {
+    if (this.checked) {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+}
