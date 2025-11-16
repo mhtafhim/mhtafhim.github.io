@@ -134,8 +134,9 @@ a:hover {
   display: flex;
   flex-direction: column;
   height: 100%;
-  justify-content: center; /* Center content vertically */
+  justify-content: flex-start; /* Align content to the start */
   align-items: center; /* Center content horizontally */
+  overflow: hidden; /* Hide overflow for nav-content */
 }
 
 /* Mobile Menu Toggle */
@@ -169,8 +170,8 @@ a:hover {
 
 .profile-logo {
   display: block;
-  width: 100px; 
-  height: 100px; 
+  width: 150px; 
+  height: 150px; 
   margin: 0 auto var(--spacing-lg) auto; /* Keep horizontal centering, rely on parent padding for top spacing */
   border-radius: 50%;
   overflow: hidden;
@@ -196,6 +197,13 @@ a:hover {
   gap: var(--spacing-sm);
   list-style: none;
   padding: 0;
+  flex-grow: 1; /* Allow nav links to grow and take available space */
+  overflow-y: auto; /* Make only nav links scrollable */
+  scrollbar-width: none;  /* Firefox */
+}
+
+#sidebar-nav .nav-links::-webkit-scrollbar {
+  display: none;
 }
 
 #sidebar-nav .nav-links li {
@@ -235,7 +243,7 @@ a:hover {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  max-width: 1200px; /* Optional: Set a max-width for centered content */
+  max-width: none; /* Remove max-width to truly center content across full page width */
 }
 
 /* Container */
