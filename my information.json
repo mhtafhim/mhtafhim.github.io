@@ -1,0 +1,146 @@
+{
+  "personalInfo": {
+    "name": "Mahmudul Haque",
+    "location": "Rampura, Dhaka",
+    "contact": {
+      "email": "mahmudulhoquetafhim@gmail.com",
+      "phone": "+880 1571 472497"
+    },
+    "links": [
+      {
+        "platform": "Portfolio",
+        "username": "mh-tafhim"
+      },
+      {
+        "platform": "LinkedIn",
+        "username": "mh-tafhim"
+      },
+      {
+        "platform": "GitHub",
+        "username": "mhtafhim"
+      }
+    ]
+  },
+  "education": [
+    {
+      "institution": "Ahsanullah University of Science and Technology",
+      "degree": "BSc in Computer Science and Engineering",
+      "duration": "Jun 2021 - Jun 2025",
+      "gpa": "3.719/4.00",
+      "coursework": [
+        "Data Structure",
+        "Algorithms",
+        "Discrete Math",
+        "Information System Design and Software Engineering",
+        "Data Analytics",
+        "Cloud Computing"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "company": "Frontier Semiconductor (FSM)",
+      "title": "Software Engineer",
+      "employmentType": "Full-time",
+      "startDate": "November 2025",
+      "endDate": "Present",
+      "duration": "1 mo",
+      "location": "Dhaka, Bangladesh",
+      "workMode": "On-site",
+      "skills": ["C++", "Microsoft Foundation Class (MFC)"]
+    },
+    {
+      "company": "US-Bangla Airlines Ltd.",
+      "title": "Executive - Business Analyst",
+      "employmentType": "Full-time",
+      "startDate": "September 2025",
+      "endDate": "November 2025",
+      "duration": "3 mos",
+      "location": "Dhaka, Bangladesh",
+      "workMode": "On-site",
+      "skills": ["Wireframing", "Requirements Analysis"]
+    }
+  ],
+  "technologiesAndSkills": {
+    "languages": ["C/C++", "Java", "Python", "JavaScript"],
+    "databases": ["MySQL", "MSSQL", "Firebase"],
+    "developmentTools": ["Postman", "Git"],
+    "cloud": ["AWS EC2", "AWS S3"],
+    "ai_ml": ["ML Algorithms", "Neural Networks", "NumPy", "Pandas", "Scikit-learn", "PyTorch", "Keras", "PySpark"],
+    "others": ["OOP", "Data Structures", "Algorithms", "Linux CLI", "REST APIs", "SSH"]
+  },
+  "problemSolving": [
+    {
+      "platform": "Codeforces",
+      "details": "Max Rating: 1263 (Pupil)",
+      "link": "https://codeforces.com/profile/depressed_kiddo"
+    },
+    {
+      "platform": "CodeChef",
+      "details": "Max Rating: 1542 (3 Star)",
+      "link": "https://www.codechef.com/users/mhtafhim"
+    },
+    {
+      "platform": "LeetCode",
+      "details": "120+ solves",
+      "link": "https://leetcode.com/u/mahmudulhoquetafhim"
+    },
+    {
+      "platform": "Various Online Judges",
+      "details": "700+ problems solved (CSES, LeetCode etc)",
+      "link": "https://github.com/mhtafhim/Messy-Stuffs"
+    }
+  ],
+  "projects": [
+    {
+      "title": "EasyMart",
+      "technologies": ["Java", "Java Swing", "Apache Derby"],
+      "description": "Implemented inventory control and sales tracking with dual interfaces for management and sales executives following OOP principles.",
+      "link": "https://github.com/mhtafhim/easy-mart"
+    },
+    {
+      "title": "SonicTheHedgeHog",
+      "technologies": ["C++", "iGraphics (OpenGL)"],
+      "description": "Designed a 2D platformer featuring obstacle detection, enemy avoidance, and jump mechanics for engaging gameplay.",
+      "link": "https://github.com/mhtafhim/SonicTheHedgeHog"
+    },
+    {
+      "title": "Railway eService",
+      "technologies": ["JavaScript", "React", "C#", "ASP.NET"],
+      "description": [
+        "Developed a full-stack railway ticketing service with RESTful ASP.NET backend and React frontend for real-time train tracking.",
+        "Integrated C#/.NET for business logic and database operations, enhancing reliability and user authentication."
+      ],
+      "link": "GitHub"
+    }
+  ],
+  "researchAndThesis": {
+    "title": "Deep Reinforcement Learning for Intelligent Transportation Systems",
+    "points": [
+      "Developed an intelligent traffic management system using Deep Reinforcement Learning (DRL) to mitigate urban traffic congestion by dynamically optimizing vehicle speed limits.",
+      "Implemented and benchmarked Deep Q-Network (DQN) and Deep Transformer Q-Network (DTQN) agents within the SUMO (Simulation of Urban Mobility) environment.",
+      "Demonstrated that the DTQN model consistently outperformed traditional algorithms and the baseline DQN by leveraging temporal data to make more adaptive and efficient routing decisions."
+    ]
+  },
+  "achievements": [
+    "1st - Intra AUST Programming Contest - Fall 2022 (among more than 100 teams)",
+    "1st - Intra AUST Programming Contest - Spring 2023 (among more than 100 teams)",
+    "Participated in National Undergraduate Mathematics Olympiad (NUMO 2023)",
+    "Khondaker Ahmed Muktadir and Mosammat Khodeza Begum Scholarship (only 2 students get this)",
+    "Got Full Funded 100% Scholarship for Undergrad (only 3% students get this scholarship)"
+  ],
+  "otherExperiences": [
+    {
+      "role": "Organizer",
+      "event": "AUST CSE Carnival 4.0"
+    },
+    {
+      "role": "Executive Member",
+      "organization": "AUST Programming and Informatics Club"
+    },
+    {
+      "role": "Head of Organizing Panel",
+      "event": "AUST Inter University Programming Contest 2025"
+    }
+  ]
+}
