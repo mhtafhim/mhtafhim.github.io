@@ -22,6 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   initMobileMenuToggle(); // Initialize mobile menu toggle
   applySystemTheme(); // Apply theme based on system settings
+
+  // Add a small delay for initNavigation to ensure all DOM elements are parsed
+  setTimeout(() => {
+    initNavigation();
+  }, 0);
 });
 
 /**
@@ -192,16 +197,25 @@ function initMobileMenuToggle() {
   const sidebar = document.getElementById('sidebar-nav');
   const navLinks = document.querySelectorAll('#sidebar-nav .nav-links a');
 
+  console.log('initMobileMenuToggle: menuToggle element:', menuToggle);
+  console.log('initMobileMenuToggle: sidebar element:', sidebar);
+
   if (menuToggle && sidebar) {
     menuToggle.addEventListener('click', () => {
+      console.log('menuToggle clicked!');
       sidebar.classList.toggle('active');
       document.body.classList.toggle('no-scroll'); // Toggle no-scroll class on body
+      console.log('sidebar active class toggled:', sidebar.classList.contains('active'));
+      console.log('body no-scroll class toggled:', document.body.classList.contains('no-scroll'));
     });
 
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
+        console.log('Nav link clicked:', link.getAttribute('href'));
         sidebar.classList.remove('active');
         document.body.classList.remove('no-scroll'); // Remove no-scroll class
+        console.log('sidebar active class removed after nav click:', sidebar.classList.contains('active'));
+        console.log('body no-scroll class removed after nav click:', document.body.classList.contains('no-scroll'));
       });
     });
   }
