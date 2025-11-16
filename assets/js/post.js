@@ -22,9 +22,17 @@ function initNavigation() {
   
   document.querySelectorAll('#sidebar-nav .nav-links a').forEach(link => {
     const linkPath = link.getAttribute('href');
-    if (filename === linkPath || 
-        (filename === '' && linkPath === 'index.html') ||
-        (filename === 'blog.html' && linkPath === 'blog.html')) {
+    // Corrected logic to check if the current page (blog.html or post.html) is the target of the link.
+    // For links pointing to index.html sections, we check if the link path matches the desired section ID
+    // from the current URL's hash, or if the current page is index.html (or root) and the link is #hero.
+    const currentHash = window.location.hash;
+    const isIndexHtml = filename === 'index.html' || filename === '';
+    const isPostHtml = filename === 'post.html';
+
+    if ((linkPath === 'blog.html' && isPostHtml) || // If on post.html, blog link should be active if it was navigated from there
+        (linkPath === 'index.html' && isIndexHtml && currentHash === '') ||
+        (linkPath === 'index.html#hero' && isIndexHtml && currentHash === '#hero') ||
+        (linkPath === `index.html${currentHash}` && currentHash !== '')) {
       link.classList.add('active');
     }
   });
@@ -169,11 +177,13 @@ function initMobileMenuToggle() {
   if (menuToggle && sidebar) {
     menuToggle.addEventListener('click', () => {
       sidebar.classList.toggle('active');
+      document.body.classList.toggle('no-scroll'); // Toggle no-scroll class on body
     });
 
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
         sidebar.classList.remove('active');
+        document.body.classList.remove('no-scroll'); // Remove no-scroll class
       });
     });
   }

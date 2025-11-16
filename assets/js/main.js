@@ -12,9 +12,8 @@ const BLOG_PREVIEW_COUNT = 3; // Number of blog posts to show initially
 function initialize() {
   console.log('Initializing portfolio...');
   applySystemTheme(); // Apply theme based on system settings
-  initNavigation();
-  initScrollHide();
-  initMobileMenuToggle(); // Initialize mobile menu toggle
+
+
   loadAllData();
 }
 
@@ -26,26 +25,31 @@ if (document.readyState === 'loading') {
 }
 
 async function loadAllData() {
+  console.log('loadAllData: Starting data loading...');
   try {
-    const portfolioResponse = await fetchJsonWithRetry('my_information.json');
+    const portfolioResponse = await fetchJsonWithRetry('data/my_information.json');
     portfolioData = portfolioResponse;
-    console.log('Portfolio data loaded successfully', portfolioData);
+    console.log('loadAllData: Portfolio data loaded successfully', portfolioData);
     
     const blogResponse = await fetchJsonWithRetry('data/posts.json');
     blogPostsData = blogResponse;
-    console.log('Blog posts data loaded successfully', blogPostsData);
+    console.log('loadAllData: Blog posts data loaded successfully', blogPostsData);
 
     populateAllSections();
 
   } catch (error) {
-    console.error('Error loading essential data:', error);
+    console.error('loadAllData: Error loading essential data:', error);
     showError('Error loading website data.', error.message);
   }
+
+  console.log('loadAllData: Data loading completed');
+
 }
 
 // The fetchJsonWithRetry and showError functions will be moved/copied to blog.js and post.js as well.
 // Keeping them here for completeness in main.js context for now.
 async function fetchJsonWithRetry(url) {
+  console.log(`fetchJsonWithRetry: Attempting to fetch from: ${url}`);
   // GitHub Pages might require absolute paths or paths relative to the base URL
   const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
   
@@ -96,12 +100,13 @@ function showError(title, message) {
 }
 
 function populateAllSections() {
+  console.log('populateAllSections: Checking portfolioData status.', 'Is portfolioData null?', portfolioData === null);
   if (!portfolioData) {
-    console.warn('Portfolio data not loaded yet for sections, retrying...');
+    console.warn('populateAllSections: Portfolio data not loaded yet, retrying...');
     setTimeout(populateAllSections, 100);
     return;
   }
-  console.log('Populating all sections...');
+  console.log('populateAllSections: Populating all sections with data...');
   populateHero();
   populateAbout();
   populateEducation();
@@ -114,7 +119,17 @@ function populateAllSections() {
   populateAchievements();
   populateBlogPreviews(); // Populate blog previews for homepage
   populateContact();
-  console.log('All sections populated successfully');
+  console.log('populateAllSections: All sections populated successfully');
+
+  // Initialize DOM-dependent functions after all content has been populated
+  // Use a setTimeout to ensure the DOM has fully rendered after innerHTML updates
+  setTimeout(() => {
+    console.log('populateAllSections: Initializing navigation and other DOM-dependent features.');
+    initNavigation();
+    initScrollHide();
+    initMobileMenuToggle(); // Initialize mobile menu toggle
+    console.log('populateAllSections: Navigation and other DOM-dependent features initialized successfully');
+  }, 0);
 }
 
 function populateHero() {
@@ -514,6 +529,7 @@ function initScrollHide() {
 }
 
 function initNavigation() {
+  console.log('initNavigation: Initializing navigation...');
   const sections = document.querySelectorAll('.section');
   const navLinks = document.querySelectorAll('#sidebar-nav .nav-links a');
 
@@ -552,8 +568,11 @@ function initNavigation() {
       }
     });
   } else if (currentPath === 'index.html' || currentPath === '') {
-    // Default to home if no hash and on index.html
-    document.querySelector('#sidebar-nav .nav-links a[href="#home"]').classList.add('active');
+    // Default to hero (home) if no hash and on index.html
+    const homeLink = document.querySelector('#sidebar-nav .nav-links a[href="#hero"]');
+    if (homeLink) {
+      homeLink.classList.add('active');
+    }
   }
 }
 
@@ -578,11 +597,13 @@ function initMobileMenuToggle() {
   if (menuToggle && sidebar) {
     menuToggle.addEventListener('click', () => {
       sidebar.classList.toggle('active');
+      document.body.classList.toggle('no-scroll'); // Toggle no-scroll class on body
     });
 
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
         sidebar.classList.remove('active');
+        document.body.classList.remove('no-scroll'); // Remove no-scroll class
       });
     });
   }

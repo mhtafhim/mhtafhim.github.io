@@ -110,19 +110,19 @@ a:hover {
 #sidebar-nav {
   position: fixed;
   left: 0;
-  top: 0; /* Reset top to 0 */
+  top: 0;
   bottom: 0;
   width: 250px;
   z-index: 1000;
   background: var(--bg-secondary);
   border-right: 1px solid var(--border);
   transition: transform 0.3s ease;
-  overflow-y: auto;
-  scrollbar-width: none;
+  overflow-y: auto; /* Make the entire sidebar scrollable */
+  scrollbar-width: auto;  /* Firefox */
 }
 
 #sidebar-nav::-webkit-scrollbar {
-  display: none;
+  display: block;
 }
 
 #sidebar-nav.hidden {
@@ -130,13 +130,15 @@ a:hover {
 }
 
 #sidebar-nav .nav-content {
-  padding: var(--spacing-lg) var(--spacing-md); 
+  padding: var(--spacing-lg) var(--spacing-md);
+  padding-bottom: var(--spacing-lg); /* Added padding to the bottom */
   display: flex;
   flex-direction: column;
-  height: 100%;
-  justify-content: flex-start; /* Align content to the start */
+  height: auto; /* Allow height to adjust to content */
+  min-height: 100%; /* Ensure it takes at least 100% height */
+  justify-content: flex-start; /* Align content to the start (top) */
   align-items: center; /* Center content horizontally */
-  overflow: hidden; /* Hide overflow for nav-content */
+  overflow: visible; /* Allow content to overflow for scrolling */
 }
 
 /* Mobile Menu Toggle */
@@ -172,7 +174,7 @@ a:hover {
   display: block;
   width: 150px; 
   height: 150px; 
-  margin: 0 auto var(--spacing-lg) auto; /* Keep horizontal centering, rely on parent padding for top spacing */
+  margin: var(--spacing-md) auto var(--spacing-lg) auto; 
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid var(--accent);
@@ -197,13 +199,13 @@ a:hover {
   gap: var(--spacing-sm);
   list-style: none;
   padding: 0;
-  flex-grow: 1; /* Allow nav links to grow and take available space */
-  overflow-y: auto; /* Make only nav links scrollable */
-  scrollbar-width: none;  /* Firefox */
+  flex-grow: 0; 
+  overflow-y: visible; 
+  scrollbar-width: auto; 
 }
 
 #sidebar-nav .nav-links::-webkit-scrollbar {
-  display: none;
+  display: block;
 }
 
 #sidebar-nav .nav-links li {
@@ -799,9 +801,16 @@ footer {
     right: 0;
     bottom: 0;
     padding-top: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg); /* Ensure mobile nav has bottom padding */
     justify-content: flex-start;
     text-align: center;
-    z-index: 1000; /* Ensure nav is on top */
+    z-index: 1000;
+    overflow-y: auto; /* Enable scrolling for mobile nav */
+    scrollbar-width: none; /* Hide scrollbar for mobile nav */
+  }
+
+  #sidebar-nav::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for mobile nav */
   }
 
   #sidebar-nav.active {
@@ -811,28 +820,34 @@ footer {
   #sidebar-nav .nav-content {
     padding: var(--spacing-md) 0;
     justify-content: center;
+    height: auto; /* Allow content to dictate height */
+    min-height: auto; /* Reset min-height for mobile */
+  }
+
+  .profile-logo {
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl); /* Increase space below profile picture */
   }
 
   #sidebar-nav .nav-links {
-    align-items: center;
-    width: 100%;
+    gap: var(--spacing-md); /* Increase gap between nav items */
   }
 
   #sidebar-nav .nav-links a {
     text-align: center;
     width: 80%;
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-md); /* Adjust padding for mobile buttons */
   }
 
   .main-content {
     margin-left: 0;
     width: 100%;
     overflow-x: hidden;
-    transition: transform 0.3s ease; /* Add transition for content */
+    transition: transform 0.3s ease;
   }
 
   #sidebar-nav.active + .main-content {
-    transform: translateX(100%); /* Push content to the right when nav is open */
+    transform: translateX(0%); /* Do not push content off-screen on mobile */
   }
 
   .menu-toggle {
@@ -840,7 +855,7 @@ footer {
     position: fixed;
     top: var(--spacing-md);
     left: var(--spacing-md);
-    z-index: 1002; /* Ensure toggle is above nav and content */
+    z-index: 1002;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 8px;
@@ -865,10 +880,6 @@ footer {
 
   body.no-scroll {
     overflow: hidden;
-  }
-
-  .profile-logo {
-    margin-top: var(--spacing-lg);
   }
 
   .timeline::before,
@@ -897,15 +908,15 @@ footer {
   }
 
   .section {
-    padding: var(--spacing-md) 0; /* Adjust section padding for mobile */
+    padding: var(--spacing-md) 0;
   }
 
 }
 
 @media (max-width: 480px) {
   .profile-logo {
-    width: 80px;
-    height: 80px;
+    width: 100px; /* Slightly larger for better visibility */
+    height: 100px;
   }
 
   .timeline::before {
