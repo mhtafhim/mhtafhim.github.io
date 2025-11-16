@@ -4,9 +4,20 @@
 
 let blogPosts = [];
 
+// Utility function to ensure sidebar is shown on desktop initially
+function showSidebarOnDesktop() {
+  const sidebar = document.getElementById('sidebar-nav');
+  if (sidebar && window.innerWidth > 768) {
+    sidebar.classList.remove('hidden');
+    sidebar.classList.remove('active'); // Ensure no mobile active class
+    document.body.classList.remove('no-scroll'); // Ensure scroll is enabled
+  }
+}
+
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
   loadBlogPosts();
+  showSidebarOnDesktop(); // Ensure sidebar is visible on desktop immediately
   initScrollHide();
   initNavigation();
   initMobileMenuToggle(); // Initialize mobile menu toggle
@@ -22,9 +33,6 @@ function initNavigation() {
   
   document.querySelectorAll('#sidebar-nav .nav-links a').forEach(link => {
     const linkPath = link.getAttribute('href');
-    // Corrected logic to check if the current page (blog.html or post.html) is the target of the link.
-    // For links pointing to index.html sections, we check if the link path matches the desired section ID
-    // from the current URL's hash, or if the current page is index.html (or root) and the link is #hero.
     const currentHash = window.location.hash;
     const isIndexHtml = filename === 'index.html' || filename === '';
     const isBlogHtml = filename === 'blog.html';
@@ -33,9 +41,24 @@ function initNavigation() {
         (linkPath === 'index.html' && isIndexHtml && currentHash === '') ||
         (linkPath === 'index.html#hero' && isIndexHtml && currentHash === '#hero') ||
         (linkPath === `index.html${currentHash}` && currentHash !== '')) {
+      link.classList.remove('active'); // Remove active class by default
       link.classList.add('active');
     }
   });
+
+  // Handle initial active link on load for blog.html with a slight delay
+  setTimeout(() => {
+    const currentHash = window.location.hash;
+    const homeLink = document.querySelector('#sidebar-nav .nav-links a[href="index.html#hero"]');
+    if (homeLink && currentHash === '#hero') {
+      homeLink.classList.add('active');
+    } else if (filename === 'blog.html') {
+      const blogLink = document.querySelector('#sidebar-nav .nav-links a[href="blog.html"]');
+      if (blogLink) {
+        blogLink.classList.add('active');
+      }
+    }
+  }, 0);
 }
 
 /**
@@ -48,7 +71,11 @@ function initScrollHide() {
   let lastScrollTop = 0;
   let scrollTimeout;
   
+  // Removed: Show sidebar initially on desktop, now handled by showSidebarOnDesktop()
+
   window.addEventListener('scroll', () => {
+    if (window.innerWidth <= 768) return; // Disable on mobile, mobile uses menu toggle
+
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
     clearTimeout(scrollTimeout);
@@ -62,14 +89,27 @@ function initScrollHide() {
     
     lastScrollTop = scrollTop;
     
+    // Keep sidebar visible for a short period after scrolling stops
     scrollTimeout = setTimeout(() => {
       sidebar.classList.remove('hidden');
     }, 1500);
   });
   
   document.addEventListener('mousemove', (e) => {
+    if (window.innerWidth <= 768) return; // Disable on mobile
     if (e.clientX < 50) {
       sidebar.classList.remove('hidden');
+    }
+  });
+
+  // Handle resize to show/hide sidebar based on desktop/mobile view
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      sidebar.classList.remove('hidden');
+      sidebar.classList.remove('active'); // Ensure mobile active class is removed
+      document.body.classList.remove('no-scroll'); // Ensure scroll is enabled
+    } else {
+      sidebar.classList.add('hidden'); // Hide sidebar on mobile by default
     }
   });
 }

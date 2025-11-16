@@ -117,12 +117,12 @@ a:hover {
   background: var(--bg-secondary);
   border-right: 1px solid var(--border);
   transition: transform 0.3s ease;
-  overflow-y: auto; /* Make the entire sidebar scrollable */
-  scrollbar-width: auto;  /* Firefox */
+  overflow-y: auto; 
+  scrollbar-width: auto; 
 }
 
-#sidebar-nav::-webkit-scrollbar {
-  display: block;
+#sidebar-nav.active {
+  transform: translateX(0%); /* Show when active */
 }
 
 #sidebar-nav.hidden {
@@ -235,17 +235,18 @@ a:hover {
 
 /* Main Content Wrapper */
 .main-content {
-  margin-left: 250px;
-  transition: margin-left 0.3s ease, margin-right 0.3s ease, width 0.3s ease;
+  margin-left: 0; /* Always occupy full width */
+  width: 100%; /* Always occupy full width */
+  transition: none; /* Remove transitions related to margin/width */
   min-height: 100vh;
-  width: calc(100% - 250px); /* Adjust width when sidebar is visible */
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 #sidebar-nav.hidden + .main-content {
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0; /* No margin when sidebar is hidden */
+  margin-right: 0;
   width: 100%;
-  max-width: none; /* Remove max-width to truly center content across full page width */
+  max-width: none;
 }
 
 /* Container */
@@ -801,42 +802,46 @@ footer {
     right: 0;
     bottom: 0;
     padding-top: var(--spacing-lg);
-    padding-bottom: var(--spacing-lg); /* Ensure mobile nav has bottom padding */
+    padding-bottom: var(--spacing-lg); 
     justify-content: flex-start;
     text-align: center;
     z-index: 1000;
-    overflow-y: auto; /* Enable scrolling for mobile nav */
-    scrollbar-width: none; /* Hide scrollbar for mobile nav */
+    overflow-y: auto; 
+    scrollbar-width: none; 
   }
 
   #sidebar-nav::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for mobile nav */
+    display: none; 
   }
 
   #sidebar-nav.active {
     transform: translateX(0%);
   }
 
+  #sidebar-nav.hidden {
+    transform: translateX(-100%); /* Ensure sidebar is hidden on mobile if .hidden is applied */
+  }
+
   #sidebar-nav .nav-content {
     padding: var(--spacing-md) 0;
     justify-content: center;
-    height: auto; /* Allow content to dictate height */
-    min-height: auto; /* Reset min-height for mobile */
+    height: auto; 
+    min-height: auto; 
   }
 
   .profile-logo {
     margin-top: var(--spacing-lg);
-    margin-bottom: var(--spacing-xl); /* Increase space below profile picture */
+    margin-bottom: var(--spacing-xl); 
   }
 
   #sidebar-nav .nav-links {
-    gap: var(--spacing-md); /* Increase gap between nav items */
+    gap: var(--spacing-md); 
   }
 
   #sidebar-nav .nav-links a {
     text-align: center;
     width: 80%;
-    padding: var(--spacing-md); /* Adjust padding for mobile buttons */
+    padding: var(--spacing-md); 
   }
 
   .main-content {
@@ -847,7 +852,7 @@ footer {
   }
 
   #sidebar-nav.active + .main-content {
-    transform: translateX(0%); /* Do not push content off-screen on mobile */
+    transform: translateX(0%); 
   }
 
   .menu-toggle {

@@ -8,11 +8,21 @@ let portfolioData = null;
 let blogPostsData = [];
 const BLOG_PREVIEW_COUNT = 3; // Number of blog posts to show initially
 
+// Utility function to ensure sidebar is shown on desktop initially
+function showSidebarOnDesktop() {
+  const sidebar = document.getElementById('sidebar-nav');
+  if (sidebar && window.innerWidth > 768) {
+    sidebar.classList.remove('hidden');
+    sidebar.classList.remove('active'); // Ensure no mobile active class
+    document.body.classList.remove('no-scroll'); // Ensure scroll is enabled
+  }
+}
+
 // Initialize when DOM is ready
 function initialize() {
   console.log('Initializing portfolio...');
   applySystemTheme(); // Apply theme based on system settings
-
+  showSidebarOnDesktop(); // Ensure sidebar is visible on desktop immediately
 
   loadAllData();
 }
@@ -86,7 +96,7 @@ async function fetchJsonWithRetry(url) {
 function showError(title, message) {
   const container = document.querySelector('.main-content') || document.body;
   const errorMsg = document.createElement('div');
-  errorMsg.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); z-index: 9999; text-align: center; max-width: 600px; box-shadow: var(--shadow-lg);';
+  errorMsg.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); z-index: 9999; text-align: center; max-width: 600px; box-shadow: var(--shadow-lg)';
   errorMsg.innerHTML = `
     <h3 style="color: var(--accent); margin-bottom: 1rem;">${title}</h3>
     <p style="color: var(--text-secondary); margin-bottom: 1rem;">${message}</p>
@@ -129,7 +139,7 @@ function populateAllSections() {
     initScrollHide();
     initMobileMenuToggle(); // Initialize mobile menu toggle
     console.log('populateAllSections: Navigation and other DOM-dependent features initialized successfully');
-  }, 0);
+  }, 0); // Small delay to ensure DOM is ready
 }
 
 function populateHero() {
@@ -502,7 +512,11 @@ function initScrollHide() {
   let lastScrollTop = 0;
   let scrollTimeout;
   
+  // Removed: Show sidebar initially on desktop, now handled by showSidebarOnDesktop()
+
   window.addEventListener('scroll', () => {
+    if (window.innerWidth <= 768) return; // Disable on mobile, mobile uses menu toggle
+
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
     clearTimeout(scrollTimeout);
@@ -516,14 +530,27 @@ function initScrollHide() {
     
     lastScrollTop = scrollTop;
     
+    // Keep sidebar visible for a short period after scrolling stops
     scrollTimeout = setTimeout(() => {
       sidebar.classList.remove('hidden');
     }, 1500);
   });
   
   document.addEventListener('mousemove', (e) => {
+    if (window.innerWidth <= 768) return; // Disable on mobile
     if (e.clientX < 50) {
       sidebar.classList.remove('hidden');
+    }
+  });
+
+  // Handle resize to show/hide sidebar based on desktop/mobile view
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      sidebar.classList.remove('hidden');
+      sidebar.classList.remove('active'); // Ensure mobile active class is removed
+      document.body.classList.remove('no-scroll'); // Ensure scroll is enabled
+    } else {
+      sidebar.classList.add('hidden'); // Hide sidebar on mobile by default
     }
   });
 }
@@ -558,22 +585,24 @@ function initNavigation() {
     observer.observe(section);
   });
 
-  // Handle initial active link on load
-  const currentHash = window.location.hash;
-  const currentPath = window.location.pathname.split('/').pop();
-  if (currentHash) {
-    navLinks.forEach(link => {
-      if (link.getAttribute('href') === currentHash) {
-        link.classList.add('active');
+  // Handle initial active link on load with a slight delay
+  setTimeout(() => {
+    const currentHash = window.location.hash;
+    const currentPath = window.location.pathname.split('/').pop();
+    if (currentHash) {
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentHash) {
+          link.classList.add('active');
+        }
+      });
+    } else if (currentPath === 'index.html' || currentPath === '') {
+      // Default to hero (home) if no hash and on index.html
+      const homeLink = document.querySelector('#sidebar-nav .nav-links a[href="#hero"]');
+      if (homeLink) {
+        homeLink.classList.add('active');
       }
-    });
-  } else if (currentPath === 'index.html' || currentPath === '') {
-    // Default to hero (home) if no hash and on index.html
-    const homeLink = document.querySelector('#sidebar-nav .nav-links a[href="#hero"]');
-    if (homeLink) {
-      homeLink.classList.add('active');
     }
-  }
+  }, 0); // Small delay to ensure DOM is ready
 }
 
 function applySystemTheme() {
