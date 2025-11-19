@@ -1,6 +1,8 @@
 {
   "personalInfo": {
     "name": "Mahmudul Haque Tafhim",
+    "title": "Software Engineer",
+    "intro": "Passionate about building scalable software and solving complex algorithmic problems.",
     "location": "Rampura, Dhaka",
     "contact": {
       "email": "mahmudulhoquetafhim@gmail.com",
@@ -60,7 +62,10 @@
       "duration": "1 mo",
       "location": "Dhaka, Bangladesh",
       "workMode": "On-site",
-      "skills": ["C++", "Microsoft Foundation Class (MFC)"]
+      "skills": [
+        "C++",
+        "Microsoft Foundation Class (MFC)"
+      ]
     },
     {
       "company": "US-Bangla Airlines Ltd.",
@@ -71,16 +76,50 @@
       "duration": "3 mos",
       "location": "Dhaka, Bangladesh",
       "workMode": "On-site",
-      "skills": ["Wireframing", "Requirements Analysis"]
+      "skills": [
+        "Wireframing",
+        "Requirements Analysis"
+      ]
     }
   ],
   "technologiesAndSkills": {
-    "languages": ["C/C++", "Java", "Python", "JavaScript"],
-    "databases": ["MySQL", "MSSQL", "Firebase"],
-    "developmentTools": ["Postman", "Git"],
-    "cloud": ["AWS EC2", "AWS S3"],
-    "ai_ml": ["ML Algorithms", "Neural Networks", "NumPy", "Pandas", "Scikit-learn", "PyTorch", "Keras", "PySpark"],
-    "others": ["OOP", "Data Structures", "Algorithms", "Linux CLI", "REST APIs", "SSH"]
+    "languages": [
+      "C/C++",
+      "Java",
+      "Python",
+      "JavaScript"
+    ],
+    "databases": [
+      "MySQL",
+      "MSSQL",
+      "Firebase"
+    ],
+    "developmentTools": [
+      "Postman",
+      "Git"
+    ],
+    "cloud": [
+      "AWS EC2",
+      "AWS S3"
+    ],
+    "ai_ml": [
+      "ML Algorithms",
+      "Neural Networks",
+      "NumPy",
+      "Pandas",
+      "Scikit-learn",
+      "PyTorch",
+      "Keras",
+      "PySpark"
+    ],
+    "others": [
+      "OOP",
+      "Data Structures",
+      "Algorithms",
+      "Linux CLI",
+      "REST APIs",
+      "SSH"
+    ]
   },
   "problemSolving": [
     {
@@ -107,23 +146,32 @@
   "projects": [
     {
       "title": "EasyMart",
-      "technologies": ["Java", "Java Swing", "Apache Derby"],
+      "technologies": [
+        "Java",
+        "Java Swing",
+        "Apache Derby"
+      ],
       "description": "Implemented inventory control and sales tracking with dual interfaces for management and sales executives following OOP principles.",
       "link": "https://github.com/mhtafhim/easy-mart"
     },
     {
       "title": "SonicTheHedgeHog",
-      "technologies": ["C++", "iGraphics (OpenGL)"],
+      "technologies": [
+        "C++",
+        "iGraphics (OpenGL)"
+      ],
       "description": "Designed a 2D platformer featuring obstacle detection, enemy avoidance, and jump mechanics for engaging gameplay.",
       "link": "https://github.com/mhtafhim/SonicTheHedgeHog"
     },
     {
       "title": "Railway eService",
-      "technologies": ["JavaScript", "React", "C#", "ASP.NET"],
-      "description": [
-        "Developed a full-stack railway ticketing service with RESTful ASP.NET backend and React frontend for real-time train tracking.",
-        "Integrated C#/.NET for business logic and database operations, enhancing reliability and user authentication."
+      "technologies": [
+        "JavaScript",
+        "React",
+        "C#",
+        "ASP.NET"
       ],
+      "description": "Developed a full-stack railway ticketing service with RESTful ASP.NET backend and React frontend for real-time train tracking.",
       "link": "GitHub"
     }
   ],

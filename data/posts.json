@@ -1,42 +1,26 @@
 [
-  {
-    "id": 1,
-    "title": "My Journey Into Reinforcement Learning",
-    "slug": "reinforcement-learning-journey",
-    "date": "2025-01-10",
-    "short": "How I built a DRL model that beats DQN.",
-    "content": "Full blog content here..."
-  },
-  {
-    "id": 2,
-    "title": "Understanding Convolutional Neural Networks",
-    "slug": "understanding-cnns",
-    "date": "2025-02-15",
-    "short": "A deep dive into CNNs and their applications.",
-    "content": "Detailed explanation of CNN architecture and examples."
-  },
-  {
-    "id": 3,
-    "title": "The Future of AI in Healthcare",
-    "slug": "ai-in-healthcare",
-    "date": "2025-03-20",
-    "short": "Exploring the impact of AI on medical advancements.",
-    "content": "Analysis of AI-driven diagnostics, drug discovery, and personalized treatment."
-  },
-  {
-    "id": 4,
-    "title": "Quantum Computing: A Beginner's Guide",
-    "slug": "quantum-computing-guide",
-    "date": "2025-04-01",
-    "short": "An introduction to the fascinating world of quantum computing.",
-    "content": "Explanation of quantum principles, qubits, and potential applications."
-  },
-  {
-    "id": 5,
-    "title": "The Ethics of Artificial Intelligence",
-    "slug": "ai-ethics",
-    "date": "2025-05-05",
-    "short": "Discussing the moral implications and societal impact of AI.",
-    "content": "Examination of bias, privacy, accountability, and the future of AI ethics."
-  }
+    {
+        "id": 1,
+        "slug": "getting-started-with-cpp",
+        "title": "Getting Started with C++",
+        "date": "Oct 10, 2025",
+        "summary": "A beginner's guide to setting up your environment and writing your first C++ program.",
+        "content": "<p>C++ is a powerful general-purpose programming language. It can be used to develop operating systems, browsers, games, and so on. C++ supports different ways of programming like procedural, object-oriented, functional, and so on. This makes C++ powerful as well as flexible.</p><h3>Setting up the Environment</h3><p>To start coding in C++, you need a compiler and a text editor. Popular choices include GCC for the compiler and VS Code for the editor.</p><h3>Hello World</h3><pre><code>#include &lt;iostream&gt;\n\nint main() {\n    std::cout << \"Hello, World!\";\n    return 0;\n}</code></pre>"
+    },
+    {
+        "id": 2,
+        "slug": "understanding-data-structures",
+        "title": "Understanding Data Structures",
+        "date": "Nov 05, 2025",
+        "summary": "Why data structures are crucial for efficient software development.",
+        "content": "<p>Data structures are a way of organizing and storing data so that they can be accessed and worked with efficiently. They define the relationship between the data, and the operations that can be performed on the data.</p><h3>Common Data Structures</h3><ul><li>Arrays</li><li>Linked Lists</li><li>Stacks</li><li>Queues</li><li>Trees</li><li>Graphs</li></ul>"
+    },
+    {
+        "id": 3,
+        "slug": "intro-to-machine-learning",
+        "title": "Introduction to Machine Learning",
+        "date": "Nov 15, 2025",
+        "summary": "Brief overview of ML concepts and how to get started.",
+        "content": "<p>Machine Learning is a subset of artificial intelligence (AI) that focuses on building systems that learn, or improve performance, based on the data they consume. Artificial Intelligence is a broad term that refers to systems or machines that mimic human intelligence.</p><h3>Types of Machine Learning</h3><ul><li>Supervised Learning</li><li>Unsupervised Learning</li><li>Reinforcement Learning</li></ul>"
+    }
 ]
