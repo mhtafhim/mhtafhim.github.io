@@ -1,0 +1,16 @@
+
+
+frontier semiconductor is a leading semiconductor company based in usa. and they operate in total 6 countries including bangladesh. and bangladesh office is R&D office.It works on semiconductor metrology tools.FSM tools and solutions are used by tech giants such as TSMC, Intel, Samsung, UMC, STMicroelectronics, Applied Materials, etc. for chip manufacturing.
+
+
+i am currently working as software engineer(R&D) for Frontier semiconductor bangladesh ltd. I did my BSc in CSE from Ahsanullah University of Science and Technology. And i found job opportunity through facebook group and requirement was 0-2 years of experience. and they highly encourage knowing c++ and good problem solving(specially competitive programming).
+
+
+Now i am going to talk about recruit process for the position of software engineer: 
+
+recruitment process had total 3 phase. written test, technical interview and lastly Management Interview.
+
+written test : written and technical interview was on same day. first they took a paper based written test on campus. written test was consist of 3 questions. first one was a programming problem (mostly easy to medium ICPC IUPC style problem). for me it was a simple greedy problem. 2nd one was a OOP problem where they gave a scenario then told to came up with idea how can we solve that using OOP. and the problem was very critical it someone cant keep calm theres high chance of doing blunder during test. and last question was about behavioural question.like if you got this situation how would you do like questions. and they gave approximately 1 hours for these to solve. if someone knows answer it shouldn't take more than 35-40 minutes. all questions were asked to must answer using c++. 
+
+ 
+technical interview : it held just after the written test. and technical interview was roughly about 30 minutes. in my interview there was 4 software engineers with software lead. First asked me about myself and about my competitive programming background. and then another person asked me about the programming problem i solved in written test , first listend how i solved it and then did some modification if condition modified how would i solve it. after than another person asked about the 2nd question OOP question from written test. mostly asked why did i choose this approach and how it solve the problem that was stated in problem statement. and that 
