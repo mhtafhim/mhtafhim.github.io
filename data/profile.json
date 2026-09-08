@@ -1,12 +1,11 @@
 {
   "personalInfo": {
-    "name": "Mahmudul Haque Tafhim",
+    "name": "Mahmudul Haque",
     "title": "Software Engineer",
-    "intro": "Passionate about building scalable software and solving complex algorithmic problems.",
-    "location": "Rampura, Dhaka",
+    "intro": "Software engineer working on semiconductor tool automation, computer vision, and AI-assisted machine operation.",
+    "location": "Dhaka, Bangladesh; relocating to Dresden in October 2026",
     "contact": {
-      "email": "mahmudulhoquetafhim@gmail.com",
-      "phone": "+880 1571 472497"
+      "email": "mahmudulhoquetafhim@gmail.com"
     },
     "links": [
       {
@@ -38,6 +37,12 @@
   },
   "education": [
     {
+      "institution": "TU Chemnitz",
+      "degree": "MSc Automotive Software Engineering",
+      "duration": "Starting October 2026",
+      "coursework": ["Embedded systems", "Software engineering"]
+    },
+    {
       "institution": "Ahsanullah University of Science and Technology",
       "degree": "BSc in Computer Science and Engineering",
       "duration": "Jun 2021 - Jun 2025",
@@ -55,11 +60,10 @@
   "experience": [
     {
       "company": "Frontier Semiconductor (FSM)",
-      "title": "Software Engineer",
+      "title": "Software Engineer (R&D)",
       "employmentType": "Full-time",
       "startDate": "November 2025",
       "endDate": "Present",
-      "duration": "1 mo",
       "location": "Dhaka, Bangladesh",
       "workMode": "On-site",
       "skills": [
@@ -69,10 +73,10 @@
     },
     {
       "company": "US-Bangla Airlines Ltd.",
-      "title": "Executive - Business Analyst",
+      "title": "Technical Business Analyst",
       "employmentType": "Full-time",
-      "startDate": "September 2025",
-      "endDate": "November 2025",
+      "startDate": "August 2025",
+      "endDate": "October 2025",
       "duration": "3 mos",
       "location": "Dhaka, Bangladesh",
       "workMode": "On-site",
@@ -172,7 +176,7 @@
         "ASP.NET"
       ],
       "description": "Developed a full-stack railway ticketing service with RESTful ASP.NET backend and React frontend for real-time train tracking.",
-      "link": "GitHub"
+      "link": "https://github.com/mhtafhim/railways3.0"
     }
   ],
   "researchAndThesis": {
