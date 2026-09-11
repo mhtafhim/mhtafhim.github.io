@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<main id="main" class="wrap log-index">
+  <header class="log-intro">
+    <p class="eyebrow">Mahmudul Haque / Personal log</p>
+    <h1>Tafhim’s Log</h1>
+    <p>Technology, experiences, and observations—in writing and video.</p>
+  </header>
+  <form class="log-filters" role="search" hidden>
+    <div class="search-field"><label for="log-search">Search entries</label><input id="log-search" type="search" placeholder="Search titles, topics, or descriptions" autocomplete="off"></div>
+    <div class="topic-field"><label for="log-category">Topic</label><select id="log-category"><option value="">All topics</option>{% for category in categories %}<option value="{{ category }}">{{ category }}</option>{% endfor %}</select></div>
+    <div class="type-field"><label for="log-type">Format</label><select id="log-type"><option value="">All formats</option><option value="Article">Article</option><option value="Video">Video</option></select></div>
+  </form>
+  <div class="log-list-heading"><h2>All entries</h2><p id="post-count" role="status" aria-live="polite">{{ posts|length }} {{ 'entry' if posts|length == 1 else 'entries' }}</p></div>
+  <div id="posts-container">
+  {% for item in posts %}
+    <article class="log-entry" data-category="{{ item.category }}" data-type="{{ item.content_type }}" data-search="{{ item.title }} {{ item.summary }} {{ item.category }} {{ item.content_type }}">
+      <div class="entry-date"><time datetime="{{ item.date.isoformat() }}">{{ item.display_date }}</time>{% if item.content_type == 'Article' %}<span>{{ item.reading_time }} min read</span>{% endif %}</div>
+      <div><p class="entry-category">{{ item.content_type }} · {{ item.category }}{% if item.sample %} · Sample entry{% endif %}</p><h2><a href="log/{{ item.slug }}.html">{{ item.title }}</a></h2><p class="entry-summary">{{ item.summary }}</p><div class="entry-links"><a class="text-link" href="log/{{ item.slug }}.html" aria-label="Open {{ item.title }}">{{ 'Read article' if item.content_type == 'Article' else 'View entry' }} <span aria-hidden="true">↗</span></a>{% if item.youtube %}<a class="text-link" href="{{ item.youtube }}" target="_blank" rel="noopener" aria-label="Watch video: {{ item.title }} (opens in a new tab)">Watch video <span aria-hidden="true">↗</span></a>{% endif %}</div></div>
+    </article>
+  {% else %}<p class="empty-posts">No entries published yet. Check back soon.</p>{% endfor %}
+  </div>
+  <div class="search-empty" hidden><h2>No matching entries</h2><p>Try another keyword or choose a different topic.</p><button type="button" class="text-link" id="reset-search">Clear filters</button></div>
+</main>
+{% endblock %}

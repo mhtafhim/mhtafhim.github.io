@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0A0A0A">
+  <title>{{ title }} | Mahmudul Haque</title>
+  <meta name="description" content="{{ description }}">
+  <link rel="canonical" href="https://mhtafhim.github.io/{{ page_path }}">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:type" content="{{ 'article' if post else 'website' }}">
+  <meta property="og:url" content="https://mhtafhim.github.io/{{ page_path }}">
+  {% if post %}<meta property="article:published_time" content="{{ post.date.isoformat() }}">{% endif %}
+  <link rel="icon" href="{{ prefix }}assets/favicon.svg" type="image/svg+xml">
+  <script src="{{ prefix }}assets/js/theme.js"></script>
+  <link rel="stylesheet" href="{{ prefix }}assets/css/theme.css">
+  <link rel="stylesheet" href="{{ prefix }}assets/css/portfolio.css">
+  <link rel="stylesheet" href="{{ prefix }}assets/css/log.css">
+  <script src="{{ prefix }}assets/js/portfolio.js" defer></script>
+  <script src="{{ prefix }}assets/js/log.js" defer></script>
+</head>
+<body class="log-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header wrap">
+  <div class="nav glass">
+    <a class="brand" href="{{ prefix }}index.html" aria-label="Mahmudul Haque, portfolio">mh<span>.</span></a>
+    <button class="menu-toggle" type="button" aria-controls="main-navigation" aria-expanded="false">Menu <span aria-hidden="true">+</span></button>
+    <nav id="main-navigation" aria-label="Main navigation">
+      <a href="{{ prefix }}index.html">Portfolio</a>
+      <a href="{{ prefix }}log.html" aria-current="page">Log</a>
+      <a class="nav-contact" href="{{ prefix }}index.html#contact">Contact <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
+{% block content %}{% endblock %}
+<footer class="wrap footer">
+  <a class="brand" href="{{ prefix }}index.html" aria-label="Mahmudul Haque, portfolio">mh<span>.</span></a>
+  <span>© 2026 Mahmudul Haque</span>
+  <div class="footer-links"><a href="{{ prefix }}log.html">Log</a><a href="#main">Back to top ↑</a></div>
+  <div class="theme-control" hidden><span id="theme-label">Appearance</span><div class="theme-options" role="group" aria-labelledby="theme-label"><button type="button" data-theme-choice="system" aria-pressed="true">System</button><button type="button" data-theme-choice="light" aria-pressed="false">Light</button><button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div></div>
+</footer>
+</body>
+</html>

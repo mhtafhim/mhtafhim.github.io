@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<main id="main" class="wrap article-page">
+  <a class="back-to-log" href="../log.html">← All entries</a>
+  <div class="article-layout">
+    <aside class="article-outline" aria-label="Article navigation">
+      <details class="toc-panel" open>
+        <summary>On this page</summary>
+        <nav aria-label="On this page">
+          <a href="#article-title" class="toc-link" aria-current="location">Overview</a>
+          {% for heading in post.headings %}<a class="toc-link toc-level-{{ heading.level }}" href="#{{ heading.id }}">{{ heading.text }}</a>{% endfor %}
+        </nav>
+      </details>
+    </aside>
+    <article id="post-content" class="article-content">
+      <header class="article-header">
+        <p class="entry-category">{{ post.content_type }} · {{ post.category }}</p>
+        <h1 id="article-title">{{ post.title }}</h1>
+        <p class="article-summary">{{ post.summary }}</p>
+        <div class="article-byline"><span>Mahmudul Haque</span><time datetime="{{ post.date.isoformat() }}">{{ post.display_date }}</time>{% if post.content_type == 'Article' %}<span>{{ post.reading_time }} min read</span>{% endif %}</div>
+      </header>
+      {% if post.sample %}<p class="sample-notice">Sample entry for this log. This illustrative draft is not a record of personal events.</p>{% endif %}
+      {% if post.youtube %}<div class="video-companion"><a class="text-link" href="{{ post.youtube }}" target="_blank" rel="noopener" aria-label="Watch video on YouTube (opens in a new tab)">Watch video <span aria-hidden="true">↗</span></a></div>{% endif %}
+      <div class="post-body">{{ post.html|safe }}</div>
+      <nav class="adjacent-posts" aria-label="More entries">
+        {% if newer %}<a href="{{ newer.slug }}.html"><span>Newer entry</span>{{ newer.title }}</a>{% endif %}
+        {% if older %}<a href="{{ older.slug }}.html"><span>Older entry</span>{{ older.title }}</a>{% endif %}
+      </nav>
+    </article>
+    <aside class="other-posts" aria-labelledby="other-posts-title">
+      <div class="other-posts-inner"><h2 id="other-posts-title">Related entries</h2>
+      {% for item in others %}<a class="other-post-link" href="{{ item.slug }}.html"><span>{{ item.title }}</span><small>{{ item.content_type }} · {{ item.display_date }}{% if item.sample %} · Sample{% endif %}</small></a>{% else %}<p>More entries coming soon.</p>{% endfor %}
+      <a class="text-link" href="../log.html">View all entries <span aria-hidden="true">↗</span></a></div>
+    </aside>
+  </div>
+</main>
+{% endblock %}
