@@ -1,0 +1,24 @@
+{% macro heading(section, number) -%}
+<div class="section-heading">
+  <p class="eyebrow" aria-hidden="true">{{ number }}</p>
+  <h2 id="{{ section.id }}-title">{{ section.title }}</h2>
+</div>
+{%- endmacro %}
+
+{% macro entry_link(link) -%}
+{% if link %}<a class="text-link" href="{{ link.url }}">{{ link.label }} <span aria-hidden="true">↗</span></a>{% endif %}
+{%- endmacro %}
+
+{% macro stack(technologies) -%}
+{% if technologies %}<p class="stack">{{ technologies | join(' / ') }}</p>{% endif %}
+{%- endmacro %}
+
+{% macro entry_details(groups) -%}
+{% for group in groups %}
+<details class="inline-details">
+  <summary>{{ group.title }}</summary>
+  {% for paragraph in group.paragraphs %}<p>{{ paragraph }}</p>{% endfor %}
+  {% if group.bullets %}<ul>{% for bullet in group.bullets %}<li>{{ bullet }}</li>{% endfor %}</ul>{% endif %}
+</details>
+{% endfor %}
+{%- endmacro %}

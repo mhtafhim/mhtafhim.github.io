@@ -1,0 +1,8 @@
+<section class="contact-section" id="contact" aria-labelledby="contact-title"><div class="wrap section contact">
+  <div>{{ heading(section, section_number) }}<p>{{ portfolio.contact.description }}</p>
+    {% if portfolio.contact.availability or portfolio.contact.note %}<div class="contact-availability"><span>{{ portfolio.contact.availability }}{% if portfolio.contact.note %}<br><span class="muted">{{ portfolio.contact.note }}</span>{% endif %}</span></div>{% endif %}
+  </div>
+  <div class="contact-links"><a class="email-link" href="mailto:{{ portfolio.contact.email }}">{{ portfolio.contact.email }} <span aria-hidden="true">↗</span></a>
+    <div class="social-links">{% for link in profile.links if not link.url.startswith('mailto:') %}<a class="button glass" href="{{ link.url }}">{{ link.label }} <span aria-hidden="true">↗</span></a>{% endfor %}</div>
+  </div>
+</div></section>

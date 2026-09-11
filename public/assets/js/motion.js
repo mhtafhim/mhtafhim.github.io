@@ -13,7 +13,7 @@
   const selectors = [
     '.hero-main > *', '.hero-facts > div', '.section-heading',
     '.section-content > p', '.about-note', '.experience-row',
-    '.project-row', '.subsection-heading', '.web-project',
+    '.project-row', '.subsection-heading', '.web-project', '.research-projects > article',
     '.project-archive', '.research-details', '.core-skills > div',
     '.toolkit-details', '.education', '.languages',
     '.achievement-grid > article', '.recognition-details',

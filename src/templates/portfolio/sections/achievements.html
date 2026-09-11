@@ -1,0 +1,11 @@
+<section class="wrap section" id="achievements" aria-labelledby="achievements-title">
+  {{ heading(section, section_number) }}
+  {% if portfolio.achievements.featured %}<div class="achievement-grid">
+    {% for achievement in portfolio.achievements.featured %}<article><p class="achievement-number">{{ achievement.number }}<span>{{ achievement.suffix }}</span></p><h3>{{ achievement.title }}</h3><p>{{ achievement.description }}</p>{{ entry_link(achievement.link) }}</article>{% endfor %}
+  </div>{% endif %}
+  {% if portfolio.achievements.recognition or portfolio.achievements.community %}
+  <details class="recognition-details"><summary>More recognition &amp; community involvement</summary><div class="recognition-columns">
+    {% for key, label in [('recognition', 'Recognition'), ('community', 'Community')] %}{% if portfolio.achievements[key] %}<div><h3>{{ label }}</h3><ul>{% for item in portfolio.achievements[key] %}<li>{{ item }}</li>{% endfor %}</ul></div>{% endif %}{% endfor %}
+  </div></details>
+  {% endif %}
+</section>

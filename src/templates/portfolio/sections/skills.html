@@ -1,0 +1,7 @@
+<section class="wrap section section-split" id="skills" aria-labelledby="skills-title">
+  {{ heading(section, section_number) }}
+  <div class="section-content">
+    {% if portfolio.skills.core %}<dl class="core-skills">{% for group in portfolio.skills.core %}<div><dt>{{ group.category }}</dt><dd>{{ group.technologies | join(' / ') }}</dd></div>{% endfor %}</dl>{% endif %}
+    {% if portfolio.skills.toolkit %}<details class="toolkit-details"><summary>All skills &amp; technologies</summary><dl class="skills toolkit-grid">{% for group in portfolio.skills.toolkit %}<div><dt>{{ group.category }}</dt><dd>{{ group.technologies | join(', ') }}</dd></div>{% endfor %}</dl></details>{% endif %}
+  </div>
+</section>

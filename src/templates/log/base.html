@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0A0A0A">
-  <title>{{ title }} | Mahmudul Haque</title>
+  <title>{{ title }} | {{ profile.name }}</title>
   <meta name="description" content="{{ description }}">
   <link rel="canonical" href="https://mhtafhim.github.io/{{ page_path }}">
   <meta property="og:title" content="{{ title }}">
@@ -24,7 +24,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header wrap">
   <div class="nav glass">
-    <a class="brand" href="{{ prefix }}index.html" aria-label="Mahmudul Haque, portfolio">mh<span>.</span></a>
+    <a class="brand" href="{{ prefix }}index.html" aria-label="{{ profile.name }}, portfolio">{{ profile.monogram }}<span>.</span></a>
     <button class="menu-toggle" type="button" aria-controls="main-navigation" aria-expanded="false">Menu <span aria-hidden="true">+</span></button>
     <nav id="main-navigation" aria-label="Main navigation">
       <a href="{{ prefix }}index.html">Portfolio</a>
@@ -35,8 +35,8 @@
 </header>
 {% block content %}{% endblock %}
 <footer class="wrap footer">
-  <a class="brand" href="{{ prefix }}index.html" aria-label="Mahmudul Haque, portfolio">mh<span>.</span></a>
-  <span>© 2026 Mahmudul Haque</span>
+  <a class="brand" href="{{ prefix }}index.html" aria-label="{{ profile.name }}, portfolio">{{ profile.monogram }}<span>.</span></a>
+  <span>© {{ year }} {{ profile.name }}</span>
   <div class="footer-links"><a href="{{ prefix }}log.html">Log</a><a href="#main">Back to top ↑</a></div>
   <div class="theme-control" hidden><span id="theme-label">Appearance</span><div class="theme-options" role="group" aria-labelledby="theme-label"><button type="button" data-theme-choice="system" aria-pressed="true">System</button><button type="button" data-theme-choice="light" aria-pressed="false">Light</button><button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div></div>
 </footer>

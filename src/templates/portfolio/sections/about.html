@@ -1,0 +1,8 @@
+<section class="wrap section section-split" id="about" aria-labelledby="about-title">
+  {{ heading(section, section_number) }}
+  <div class="section-content">
+    {% for paragraph in portfolio.about.paragraphs %}<p>{{ paragraph }}</p>{% endfor %}
+    {% if portfolio.about.notes %}<div class="about-note">{% for note in portfolio.about.notes %}<span class="meta">{{ note }}</span>{% endfor %}</div>{% endif %}
+    {% if portfolio.about.languages %}<div class="languages"><h3>Languages</h3>{% for language in portfolio.about.languages %}<p>{{ language.name }} <span>{{ language.level }}</span></p>{% endfor %}</div>{% endif %}
+  </div>
+</section>

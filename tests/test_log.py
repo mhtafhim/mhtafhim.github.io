@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 import shutil
 import tempfile
 import unittest
@@ -8,6 +9,12 @@ from scripts.build import ROOT, build, collect_posts, read_post, render_markdown
 
 def article(title='Test post', draft='false', body='## A section\n\nSome text.'):
     return f'---\ntitle: "{title}"\ndate: "2026-09-11"\nsummary: "A summary."\ncategory: "Personal"\ndraft: {draft}\n---\n\n{body}\n'
+
+
+def copy_portfolio(root):
+    data = json.loads((ROOT / 'content' / 'portfolio.json').read_text(encoding='utf-8'))
+    data['profile'].pop('photo', None)
+    (root / 'content' / 'portfolio.json').write_text(json.dumps(data), encoding='utf-8')
 
 
 class LogTests(unittest.TestCase):
@@ -83,6 +90,7 @@ class LogTests(unittest.TestCase):
             root = Path(folder)
             shutil.copytree(ROOT / 'src', root / 'src')
             (root / 'content' / 'posts').mkdir(parents=True)
+            copy_portfolio(root)
             (root / 'public').mkdir()
             (root / 'content' / 'legacy-urls.json').write_text('["first", "video"]', encoding='utf-8')
             source = root / 'content' / 'posts' / 'first.md'
@@ -117,6 +125,7 @@ class LogTests(unittest.TestCase):
             root = Path(folder)
             shutil.copytree(ROOT / 'src', root / 'src')
             (root / 'content' / 'posts').mkdir(parents=True)
+            copy_portfolio(root)
             resume = root / 'public' / 'resume' / 'resume.pdf'
             resume.parent.mkdir(parents=True)
             (resume.parent / 'README.md').write_text('Instructions')

@@ -35,7 +35,8 @@ document.addEventListener('keydown', event => {
 document.addEventListener('click', event => {
   if (navigation && !navigation.contains(event.target)) closeMenu();
 });
-window.matchMedia('(min-width: 761px)').addEventListener('change', () => closeMenu());
+const desktopNavigation = window.matchMedia(document.body.classList.contains('portfolio-page') ? '(min-width: 1101px)' : '(min-width: 761px)');
+desktopNavigation.addEventListener('change', () => closeMenu());
 
 const sectionLinks = [...document.querySelectorAll('#main-navigation a[href^="#"]')];
 const sections = sectionLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);

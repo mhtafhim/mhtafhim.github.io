@@ -1,0 +1,651 @@
+{
+  "profile": {
+    "name": "Mahmudul Haque",
+    "monogram": "mh",
+    "page_title": "Mahmudul Haque | Software Engineer",
+    "description": "Mahmudul Haque — software engineer building semiconductor tool software, computer vision systems, and applied AI. Experience, selected projects, and contact.",
+    "role": "Software Engineer (R&D)",
+    "employer": "Frontier Semiconductor · November 2025 — present",
+    "summary": "C++ software for semiconductor tool automation, computer vision, and AI-assisted machine operation.",
+    "photo": {
+      "src": "assets/images/profile.jpg",
+      "alt": "Portrait of Mahmudul Haque"
+    },
+    "links": [
+      {
+        "label": "Email",
+        "url": "mailto:mahmudulhoquetafhim@gmail.com"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/mh-tafhim/"
+      },
+      {
+        "label": "GitHub",
+        "url": "https://github.com/mhtafhim"
+      }
+    ],
+    "resume_filename": "Mahmudul-Haque-Resume.pdf",
+    "facts": [
+      {
+        "label": "Location",
+        "value": "Dhaka, Bangladesh",
+        "detail": "Relocating to Chemnitz, Germany · October 2026"
+      },
+      {
+        "label": "Education",
+        "value": "MSc Automotive Software Engineering",
+        "detail": "TU Chemnitz · Starting October 2026"
+      },
+      {
+        "label": "Availability",
+        "value": "Seeking student roles · 15–20 hours/week",
+        "detail": "From October 2026"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "id": "experience",
+      "title": "Experience"
+    },
+    {
+      "id": "skills",
+      "title": "Skills"
+    },
+    {
+      "id": "education",
+      "title": "Education"
+    },
+    {
+      "id": "projects",
+      "title": "Projects & Research",
+      "nav_label": "Projects"
+    },
+    {
+      "id": "achievements",
+      "title": "Achievements"
+    },
+    {
+      "id": "about",
+      "title": "About Me"
+    },
+    {
+      "id": "contact",
+      "title": "Contact"
+    }
+  ],
+  "experience": [
+    {
+      "role": "Software Engineer (R&D)",
+      "organization": "Frontier Semiconductor",
+      "period": "Nov 2025 — Present",
+      "location": "Dhaka, Bangladesh",
+      "current": true,
+      "context": "California-based semiconductor metrology company · Development team in Dhaka",
+      "highlights": [
+        {
+          "label": "Tool software",
+          "text": "Developed object-oriented C++/MFC software for automation, control, measurement processing, and visualization."
+        },
+        {
+          "label": "Computer vision",
+          "text": "Worked on OpenCV image processing, stitching, and pattern recognition for wafer inspection."
+        },
+        {
+          "label": "Applied AI",
+          "text": "Worked on local LLMs, RAG, and agentic workflows for natural-language machine operation and troubleshooting."
+        }
+      ],
+      "details": [
+        {
+          "title": "Calibration & collaboration",
+          "paragraphs": [
+            "Reconstructed wafer maps from four-point calibration and modelled focal-plane compensation for stage tilt. Collaborated with the electrical team responsible for embedded implementation."
+          ]
+        }
+      ],
+      "technologies": [
+        "C++",
+        "MFC",
+        "OpenCV",
+        "CUDA",
+        "Python",
+        "Local LLMs"
+      ]
+    },
+    {
+      "role": "Technical Business Analyst",
+      "organization": "US-Bangla Airlines",
+      "period": "Aug — Oct 2025",
+      "location": "Dhaka, Bangladesh",
+      "current": false,
+      "context": "",
+      "highlights": [
+        {
+          "label": "Requirements to design",
+          "text": "Translated operational needs into technical specifications, documentation, and UI/UX wireframes."
+        },
+        {
+          "label": "Business logic",
+          "text": "Designed backend rules for crew training, certificate expiry, and programme assignments."
+        }
+      ],
+      "details": [],
+      "technologies": [
+        "Requirements analysis",
+        "Technical documentation",
+        "UI/UX wireframing"
+      ]
+    }
+  ],
+  "skills": {
+    "core": [
+      {
+        "category": "Industrial & desktop software",
+        "technologies": [
+          "C",
+          "C++",
+          "MFC",
+          "Qt",
+          "GDI+"
+        ]
+      },
+      {
+        "category": "Computer vision & machine learning",
+        "technologies": [
+          "OpenCV",
+          "CUDA",
+          "MediaPipe",
+          "PyTorch"
+        ]
+      },
+      {
+        "category": "Applied AI & retrieval",
+        "technologies": [
+          "Python",
+          "Local LLMs",
+          "RAG",
+          "LangChain",
+          "ChromaDB"
+        ]
+      },
+      {
+        "category": "Web & backend",
+        "technologies": [
+          "TypeScript",
+          "React",
+          "Next.js",
+          "FastAPI",
+          "PostgreSQL"
+        ]
+      }
+    ],
+    "toolkit": [
+      {
+        "category": "Programming",
+        "technologies": [
+          "C",
+          "C++",
+          "C#",
+          "Python",
+          "Java",
+          "JavaScript",
+          "TypeScript",
+          "PHP",
+          "HTML",
+          "CSS"
+        ]
+      },
+      {
+        "category": "Web & backend",
+        "technologies": [
+          "React",
+          "Next.js",
+          "Node.js",
+          "Express",
+          "ASP.NET Core",
+          "FastAPI",
+          "REST APIs",
+          "server-sent events",
+          "Tailwind CSS"
+        ]
+      },
+      {
+        "category": "Desktop & graphics",
+        "technologies": [
+          "MFC",
+          "Qt",
+          "GDI+",
+          "Java Swing",
+          "Three.js",
+          "OpenGL",
+          "iGraphics"
+        ]
+      },
+      {
+        "category": "Computer vision & ML",
+        "technologies": [
+          "OpenCV",
+          "CUDA",
+          "MediaPipe",
+          "DeepFace",
+          "RetinaFace",
+          "PyTorch",
+          "TensorFlow",
+          "scikit-learn",
+          "PySpark",
+          "image stitching",
+          "pattern recognition",
+          "geometric mapping",
+          "CNNs",
+          "RNNs",
+          "Deep Q-Networks"
+        ]
+      },
+      {
+        "category": "LLMs & retrieval",
+        "technologies": [
+          "Local LLMs",
+          "generative AI",
+          "RAG",
+          "embeddings",
+          "agentic workflows",
+          "LangChain",
+          "ChromaDB",
+          "Ollama",
+          "LM Studio"
+        ]
+      },
+      {
+        "category": "Databases & cloud",
+        "technologies": [
+          "SQL Server",
+          "MySQL",
+          "PostgreSQL",
+          "Firebase",
+          "Apache Derby",
+          "Prisma",
+          "AWS EC2",
+          "AWS S3"
+        ]
+      },
+      {
+        "category": "Development & deployment",
+        "technologies": [
+          "Git",
+          "Visual Studio",
+          "Visual Studio solutions/projects",
+          ".NET CLI",
+          "Postman",
+          "Docker",
+          "Docker Compose",
+          "Linux/Unix",
+          "Fedora",
+          "Linux CLI",
+          "Windows",
+          "SSH"
+        ]
+      },
+      {
+        "category": "Hardware & measurement",
+        "technologies": [
+          "Arduino",
+          "Raspberry Pi",
+          "particulate-matter and humidity sensing",
+          "digital displays",
+          "tool automation",
+          "calibration",
+          "data visualization",
+          "MCU fundamentals and CPU/GPU architecture"
+        ]
+      },
+      {
+        "category": "Engineering & research",
+        "technologies": [
+          "OOP",
+          "data structures",
+          "algorithms",
+          "modular design",
+          "refactoring",
+          "software architecture",
+          "requirements analysis",
+          "documentation",
+          "UI/UX wireframing",
+          "SUMO"
+        ]
+      },
+      {
+        "category": "Current learning interests",
+        "technologies": [
+          "CMake",
+          "embedded systems",
+          "cross-platform C++",
+          "multimodal AI",
+          "real-time intelligent interactions"
+        ]
+      }
+    ]
+  },
+  "education": [
+    {
+      "degree": "MSc Automotive Software Engineering",
+      "institution": "TU Chemnitz",
+      "period": "Starting October 2026 · Germany",
+      "description": "Enrolled for the winter semester. Focus on embedded systems and software engineering.",
+      "result": ""
+    },
+    {
+      "degree": "BSc Computer Science and Engineering",
+      "institution": "Ahsanullah University of Science and Technology",
+      "period": "June 2021 — June 2025 · Bangladesh",
+      "description": "",
+      "result": "3.719 / 4.00 CGPA"
+    }
+  ],
+  "projects": {
+    "repository_url": "https://github.com/mhtafhim",
+    "featured": [
+      {
+        "name": "Local LLM Chatbot with RAG",
+        "category": "Applied AI / Personal project",
+        "link": {
+          "label": "View source",
+          "url": "https://github.com/mhtafhim/local-llm-chatbot-with-rag"
+        },
+        "description": "A local assistant with document ingestion and retrieval, interchangeable model providers, streamed responses, and image/PDF attachments.",
+        "details": [
+          {
+            "title": "Implementation details",
+            "paragraphs": [
+              "Connected LangChain embeddings and persistent ChromaDB storage to a FastAPI backend; packaged services with Docker Compose."
+            ]
+          }
+        ],
+        "technologies": [
+          "Python",
+          "FastAPI",
+          "LangChain",
+          "ChromaDB",
+          "Docker"
+        ]
+      },
+      {
+        "name": "Face Match",
+        "category": "Computer vision / Personal project",
+        "link": {
+          "label": "View source",
+          "url": "https://github.com/mhtafhim/face-match"
+        },
+        "description": "A face-analysis application using RetinaFace alignment and FaceNet512 embeddings to compare portraits through cosine distance.",
+        "details": [
+          {
+            "title": "Implementation details",
+            "paragraphs": [
+              "Visualized a 468-point facial mesh and regional measurements using MediaPipe, a FastAPI backend, and a React interface."
+            ]
+          }
+        ],
+        "technologies": [
+          "Python",
+          "OpenCV",
+          "DeepFace",
+          "MediaPipe",
+          "React"
+        ]
+      },
+      {
+        "name": "Data Analyzer",
+        "category": "Desktop software / Personal project",
+        "link": {
+          "label": "View source",
+          "url": "https://github.com/mhtafhim/Data-Analyzer"
+        },
+        "description": "A Windows engineering tool for exploring structured text data in tables, hierarchy views, and interactive charts.",
+        "details": [
+          {
+            "title": "Implementation details",
+            "paragraphs": [
+              "Built selectable chart axes, analysis modules, and image/data export as extensible application components."
+            ]
+          }
+        ],
+        "technologies": [
+          "C++11",
+          "MFC",
+          "Visual Studio"
+        ]
+      },
+      {
+        "name": "MFC Custom Controls",
+        "category": "UI engineering / Personal project",
+        "link": {
+          "label": "View source",
+          "url": "https://github.com/mhtafhim/mfc-custom-controls"
+        },
+        "description": "A modular library of 30 reusable desktop controls, including status indicators, sliders, panels, and a semiconductor wafer map.",
+        "details": [
+          {
+            "title": "Implementation details",
+            "paragraphs": [
+              "Separated reusable components from the demo and documented APIs, integration patterns, dependencies, and known issues."
+            ]
+          }
+        ],
+        "technologies": [
+          "C++",
+          "MFC",
+          "GDI+",
+          "Visual Studio"
+        ]
+      }
+    ],
+    "web": [
+      {
+        "name": "HCFD Community Platform",
+        "category": "Web development",
+        "link": {
+          "label": "Visit website",
+          "url": "https://hcfdbd.org"
+        },
+        "description": "A bilingual Bengali/English website and administration dashboard for a student welfare organization.",
+        "technologies": [
+          "Next.js",
+          "TypeScript",
+          "PostgreSQL",
+          "Prisma"
+        ]
+      },
+      {
+        "name": "Growthy Solutions",
+        "category": "Web development",
+        "link": {
+          "label": "Visit website",
+          "url": "https://growthy-solutions.vercel.app"
+        },
+        "description": "A responsive digital-product studio website with service information, accessible navigation, and contact interactions.",
+        "technologies": [
+          "Next.js",
+          "React",
+          "TypeScript"
+        ]
+      }
+    ],
+    "more": [
+      {
+        "name": "Cotton Rose",
+        "url": "https://github.com/mhtafhim/cotton-rose-nextjs",
+        "description": "Next.js and React business website.",
+        "links": []
+      },
+      {
+        "name": "Trendora",
+        "url": "https://github.com/mhtafhim/trendora",
+        "description": "React fashion storefront with an Express / PostgreSQL backend.",
+        "links": [
+          {
+            "label": "Express / PostgreSQL backend",
+            "url": "https://github.com/mhtafhim/trendora-backend-expressjs"
+          }
+        ]
+      },
+      {
+        "name": "Railway eService",
+        "url": "https://github.com/mhtafhim/railways3.0",
+        "description": "React booking interface and C# / ASP.NET Core API.",
+        "links": [
+          {
+            "label": "C# / ASP.NET Core API",
+            "url": "https://github.com/mhtafhim/railway_eservice_api"
+          }
+        ]
+      },
+      {
+        "name": "Easy Go Holidays",
+        "url": "https://github.com/mhtafhim/easy-go-holidays-bd",
+        "description": "Responsive travel-agency website.",
+        "links": []
+      },
+      {
+        "name": "Personal Wardrobe",
+        "url": "https://github.com/mhtafhim/personal-wardrobe",
+        "description": "Bilingual packing planner with a color mixer and saved checklist.",
+        "links": []
+      },
+      {
+        "name": "Interactive 3D Book",
+        "url": "https://github.com/mhtafhim/3d-book-another",
+        "description": "Three.js book visualization with camera and lighting controls.",
+        "links": []
+      },
+      {
+        "name": "TaskMaster",
+        "url": "https://github.com/mhtafhim/todo-list",
+        "description": "PHP / MySQL task management with priorities and filters.",
+        "links": []
+      },
+      {
+        "name": "Web Media Player",
+        "url": "https://github.com/mhtafhim/iptv-player",
+        "description": "HLS playback, channel search, and a resizable interface.",
+        "links": []
+      },
+      {
+        "name": "GNOME Usage Tracker",
+        "url": "https://github.com/mhtafhim/claude-usage-tracker-gnome-extension",
+        "description": "JavaScript desktop extension for usage-limit visibility.",
+        "links": []
+      },
+      {
+        "name": "Messy Life",
+        "url": "https://github.com/mhtafhim/Messy-Life",
+        "description": "Java / Firebase Android app for shared meals and expenses.",
+        "links": []
+      },
+      {
+        "name": "Easy Mart",
+        "url": "https://github.com/mhtafhim/easy-mart",
+        "description": "Java desktop inventory and sales management.",
+        "links": []
+      },
+      {
+        "name": "Sonic 2D Game",
+        "url": "https://github.com/mhtafhim/SonicTheHedgeHog",
+        "description": "University C++ / iGraphics game project.",
+        "links": []
+      },
+      {
+        "name": "CUDA Learning Site",
+        "url": "https://github.com/mhtafhim/cuda-course",
+        "description": "Interactive browser-based learning material.",
+        "links": []
+      },
+      {
+        "name": "Operating-System Paging Guide",
+        "url": "https://github.com/mhtafhim/paging-study-guide-operating-system",
+        "description": "Web-based study guide.",
+        "links": []
+      }
+    ],
+    "research": [
+      {
+        "name": "Deep reinforcement learning for traffic routing",
+        "description": "Implemented and evaluated DQNs in Python, PyTorch, and SUMO; analysed convergence, congestion, fuel use, and emissions."
+      },
+      {
+        "name": "Live weather-index display",
+        "description": "Used Arduino and Raspberry Pi to collect particulate-matter and humidity readings, feed them to a prediction model, and show the weather index on a digital display."
+      },
+      {
+        "name": "Smart-city traffic automation",
+        "description": "Built an Arduino-based smart-city project with automated traffic management in a university laboratory."
+      }
+    ]
+  },
+  "achievements": {
+    "featured": [
+      {
+        "number": "700",
+        "suffix": "+",
+        "title": "Programming problems solved",
+        "description": "Across CSES, LeetCode, and other online judges.",
+        "link": {
+          "label": "Problem-solving work",
+          "url": "https://github.com/mhtafhim/Messy-Stuffs"
+        }
+      },
+      {
+        "number": "2",
+        "suffix": "×",
+        "title": "First place · Intra-AUST",
+        "description": "Programming Contest Fall 2022 & Spring 2023 · 100+ teams"
+      },
+      {
+        "number": "100",
+        "suffix": "%",
+        "title": "Undergraduate scholarship",
+        "description": "Fully funded scholarship awarded to 3% of students."
+      }
+    ],
+    "recognition": [
+      "Khondaker Ahmed Muktadir and Mosammat Khodeza Begum Scholarship; awarded to two students.",
+      "Participant, National Undergraduate Mathematics Olympiad (NUMO 2023)."
+    ],
+    "community": [
+      "Head of Organizing Panel, AUST Inter University Programming Contest 2025.",
+      "Executive Member, AUST Programming and Informatics Club.",
+      "Organizer, AUST CSE Carnival 4.0."
+    ]
+  },
+  "about": {
+    "paragraphs": [
+      "My work connects software with the systems it operates.",
+      "At Frontier Semiconductor, I work on tool automation, measurement processing, and operator interfaces. That work extends into computer vision for wafer inspection and local AI assistants for machine operation and troubleshooting.",
+      "I’m enrolled in the MSc Automotive Software Engineering programme at TU Chemnitz, starting October 2026, with a focus on embedded systems and software engineering."
+    ],
+    "notes": [
+      "Based in Dhaka",
+      "Relocating to Chemnitz, Germany · October 2026"
+    ],
+    "languages": [
+      {
+        "name": "English",
+        "level": "Fluent · IELTS 6.5"
+      },
+      {
+        "name": "Bengali",
+        "level": "Native"
+      },
+      {
+        "name": "German",
+        "level": "A1 / beginner"
+      }
+    ]
+  },
+  "contact": {
+    "description": "Interested in student opportunities in software engineering, embedded systems, computer vision, and applied AI.",
+    "availability": "From October 2026 · 15–20 hours/week",
+    "note": "Planning to live in Chemnitz while studying at TU Chemnitz.",
+    "email": "mahmudulhoquetafhim@gmail.com"
+  }
+}

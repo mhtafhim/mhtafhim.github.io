@@ -1,0 +1,14 @@
+<section class="wrap section" id="experience" aria-labelledby="experience-title">
+  {{ heading(section, section_number) }}
+  {% for role in portfolio.experience %}
+  <article class="experience-row">
+    <div class="role-meta"><p>{{ role.period }}</p>{% if role.location %}<p>{{ role.location }}</p>{% endif %}{% if role.current %}<span class="current-label">Current role</span>{% endif %}</div>
+    <div class="role-content">
+      <h3>{{ role.role }}</h3><p class="organization">{{ role.organization }}</p>
+      {% if role.context %}<p class="role-context">{{ role.context }}</p>{% endif %}
+      {% if role.highlights %}<ul class="impact-list">{% for highlight in role.highlights %}<li>{% if highlight.label %}<strong>{{ highlight.label }}.</strong> {% endif %}{{ highlight.text }}</li>{% endfor %}</ul>{% endif %}
+      {{ entry_details(role.details) }}{{ stack(role.technologies) }}
+    </div>
+  </article>
+  {% endfor %}
+</section>

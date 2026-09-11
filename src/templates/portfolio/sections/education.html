@@ -1,0 +1,13 @@
+<section class="wrap section section-split" id="education" aria-labelledby="education-title">
+  {{ heading(section, section_number) }}
+  <div class="section-content" id="background">
+    {% for education in portfolio.education %}
+    <article class="education">
+      <p class="meta">{{ education.period }}</p><h3>{{ education.degree }}</h3><p class="organization">{{ education.institution }}</p>
+      {% if education.description %}<p>{{ education.description }}</p>{% endif %}
+      {% if education.result %}<p class="gpa">{{ education.result }}</p>{% endif %}
+      {{ entry_details(education.details) }}
+    </article>
+    {% endfor %}
+  </div>
+</section>
