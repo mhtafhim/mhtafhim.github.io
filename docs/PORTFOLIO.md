@@ -46,7 +46,7 @@ Set an old job's `current` to `false` when it ends. Update `profile.role`, `prof
 
 **Required fields:** jobs need `role`, `organization`, and `period`; education needs `degree`, `institution`, and `period`; featured/web/research projects need `name` and `description`. Copy existing entries for optional fields.
 
-**Expandable details:** use `details` for jobs, education, and featured/web/research projects. Each group needs a `title`, plus a `paragraphs` list and/or a `bullets` list.
+**Expandable details:** use `details` for jobs, education, and featured/web/research projects. Each group needs a `title`, plus a `paragraphs` list and/or a `bullets` list. Jobs start collapsed: clicking **View work details** reveals all descriptions, highlights, detail groups, and technologies together.
 
 ## Headings, photo, and résumé
 

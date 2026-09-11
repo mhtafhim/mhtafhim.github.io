@@ -5,9 +5,23 @@
     <div class="role-meta"><p>{{ role.period }}</p>{% if role.location %}<p>{{ role.location }}</p>{% endif %}{% if role.current %}<span class="current-label">Current role</span>{% endif %}</div>
     <div class="role-content">
       <h3>{{ role.role }}</h3><p class="organization">{{ role.organization }}</p>
-      {% if role.context %}<p class="role-context">{{ role.context }}</p>{% endif %}
-      {% if role.highlights %}<ul class="impact-list">{% for highlight in role.highlights %}<li>{% if highlight.label %}<strong>{{ highlight.label }}.</strong> {% endif %}{{ highlight.text }}</li>{% endfor %}</ul>{% endif %}
-      {{ entry_details(role.details) }}{{ stack(role.technologies) }}
+      {% if role.context or role.highlights or role.details or role.technologies %}
+      <details class="experience-details">
+        <summary><span class="details-show">View work details</span><span class="details-hide">Hide work details</span></summary>
+        <div class="experience-description">
+          {% if role.context %}<p class="role-context">{{ role.context }}</p>{% endif %}
+          {% if role.highlights %}<ul class="impact-list">{% for highlight in role.highlights %}<li>{% if highlight.label %}<strong>{{ highlight.label }}.</strong> {% endif %}{{ highlight.text }}</li>{% endfor %}</ul>{% endif %}
+          {% for group in role.details %}
+          <div class="experience-detail-group">
+            <h4>{{ group.title }}</h4>
+            {% for paragraph in group.paragraphs %}<p>{{ paragraph }}</p>{% endfor %}
+            {% if group.bullets %}<ul>{% for bullet in group.bullets %}<li>{{ bullet }}</li>{% endfor %}</ul>{% endif %}
+          </div>
+          {% endfor %}
+          {{ stack(role.technologies) }}
+        </div>
+      </details>
+      {% endif %}
     </div>
   </article>
   {% endfor %}
