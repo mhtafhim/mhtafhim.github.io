@@ -26,7 +26,7 @@ ul{padding-left:20px;color:var(--muted)}li+li{margin-top:12px}
 /* A framed navigation bar with a contrasting monogram and a small orange seam. */
 .nav.glass{position:relative;background:var(--nav-surface);border:1px solid var(--nav-border);box-shadow:0 2px 3px var(--glass-shadow),0 12px 28px var(--glass-shadow)}
 .nav::before{content:"";position:absolute;left:25px;top:-1px;width:24px;height:2px;background:var(--accent-fill);pointer-events:none}
-.nav .brand{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:42px;height:42px;border-radius:9px;background:var(--text);color:var(--background);font-size:1.4rem;letter-spacing:-.085em}
+.nav .brand{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;min-width:56px;height:42px;padding-inline:7px;border-radius:9px;background:var(--text);color:var(--background);font-size:1.4rem;letter-spacing:-.085em}
 .nav .brand:hover{color:var(--background);transform:translateY(-1px)}
 .nav .brand span{color:var(--accent-fill)}
 .brand{color:var(--text);font-size:1.8rem;font-weight:650;letter-spacing:-.09em;line-height:1}.brand span{color:var(--accent)}.brand:hover{color:var(--text)}

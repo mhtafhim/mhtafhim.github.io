@@ -1,12 +1,12 @@
 {
   "profile": {
     "name": "Mahmudul Haque",
-    "monogram": "mh",
+    "monogram": "mht",
     "page_title": "Mahmudul Haque | Software Engineer",
-    "description": "Mahmudul Haque — software engineer building semiconductor tool software, computer vision systems, and applied AI. Experience, selected projects, and contact.",
+    "description": "Mahmudul Haque — software engineer building semiconductor metrology tool software, computer vision systems, and applied AI. Experience, selected projects, and contact.",
     "role": "Software Engineer (R&D)",
-    "employer": "Frontier Semiconductor · November 2025 — present",
-    "summary": "C++ software for semiconductor tool automation, computer vision, and AI-assisted machine operation.",
+    "employer": "Frontier Semiconductor (FSM) · November 2025 — present",
+    "summary": "C++ software for semiconductor metrology tool automation, computer vision.",
     "photo": {
       "src": "assets/images/profile.jpg",
       "alt": "Portrait of Mahmudul Haque"
@@ -78,7 +78,7 @@
   "experience": [
     {
       "role": "Software Engineer (R&D)",
-      "organization": "Frontier Semiconductor",
+      "organization": "Frontier Semiconductor (FSM)",
       "period": "Nov 2025 — Present",
       "location": "Dhaka, Bangladesh",
       "current": true,
@@ -86,25 +86,34 @@
       "highlights": [
         {
           "label": "Tool software",
-          "text": "Developed object-oriented C++/MFC software for automation, control, measurement processing, and visualization."
-        },
-        {
-          "label": "Computer vision",
-          "text": "Worked on OpenCV image processing, stitching, and pattern recognition for wafer inspection."
+          "text": "Built object-oriented C++/MFC software for tool automation, control, measurement-data processing, and visualization."
         },
         {
           "label": "Applied AI",
-          "text": "Worked on local LLMs, RAG, and agentic workflows for natural-language machine operation and troubleshooting."
-        }
-      ],
-      "details": [
+          "text": "Worked on local LLMs, RAG, and agentic workflows for natural-language operation of semiconductor tools."
+        },
         {
-          "title": "Calibration & collaboration",
-          "paragraphs": [
-            "Reconstructed wafer maps from four-point calibration and modelled focal-plane compensation for stage tilt. Collaborated with the electrical team responsible for embedded implementation."
-          ]
+          "label": "Operator assistance",
+          "text": "Developed chatbot assistance for operator troubleshooting and guidance on machine procedures."
+        },
+        {
+          "label": "Image stitching R&D",
+          "text": "Conducted R&D on OpenCV-based image stitching to overcome camera field-of-view limitations, evaluating multiple geometric mapping, alignment, and blending algorithms to create seamless full-die images for inspection."
+        },
+        {
+          "label": "Pattern recognition",
+          "text": "Contributed to a pattern-recognition pipeline that located a selected reference feature across every wafer die, improving repeatable positioning and measurement accuracy. Evaluated multiple recognition algorithms using OpenCV and other image-processing techniques."
+        },
+        {
+          "label": "Wafer mapping",
+          "text": "Reconstructed digital wafer die maps from four-point calibration across three adjacent dies and integrated the algorithms into an operator-facing C++/MFC interface."
+        },
+        {
+          "label": "Focus compensation",
+          "text": "Modelled a virtual 3D plane from sampled focal points and predicted Z-axis compensation, resolving probe-focusing failures on tilted stages before measurement."
         }
       ],
+      "details": [],
       "technologies": [
         "C++",
         "MFC",
