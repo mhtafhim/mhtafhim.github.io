@@ -1,12 +1,12 @@
 {
   "profile": {
-    "name": "Mahmudul Haque (Tafhim) ",
+    "name": "Mahmudul Haque",
     "monogram": "mht",
-    "page_title": "Mahmudul Haque | Software Engineer",
-    "description": "Mahmudul Haque — software engineer building semiconductor metrology tool software, computer vision systems, and applied AI. Experience, selected projects, and contact.",
-    "role": "Software Engineer (R&D)",
-    "employer": "Frontier Semiconductor (FSM) · November 2025 — present",
-    "summary": "C++ software for semiconductor metrology tool automation, computer vision.",
+    "page_title": "Mahmudul Haque | Software Engineer — C++, Computer Vision & AI",
+    "description": "Mahmudul Haque — software engineer and MSc Automotive Software Engineering student at TU Chemnitz, based in Chemnitz, Germany. C++, computer vision, AI, and hardware-oriented software.",
+    "role": "Software Engineer | C++, Computer Vision & AI",
+    "employer": "Previously at Frontier Semiconductor Metrology (FSM) · November 2025 — September 2026",
+    "summary": "MSc Automotive Software Engineering student at TU Chemnitz, with professional experience in C++, computer vision, machine learning, hardware-oriented desktop software, backend development, and requirements engineering.",
     "photo": {
       "src": "assets/images/profile.jpg",
       "alt": "Portrait of Mahmudul Haque"
@@ -29,18 +29,18 @@
     "facts": [
       {
         "label": "Location",
-        "value": "Dhaka, Bangladesh",
-        "detail": "Relocating to Chemnitz, Germany · October 2026"
+        "value": "Chemnitz, Germany",
+        "detail": ""
       },
       {
         "label": "Education",
         "value": "MSc Automotive Software Engineering",
-        "detail": "TU Chemnitz · Starting October 2026"
+        "detail": "TU Chemnitz · October 2026 — present"
       },
       {
-        "label": "Availability",
-        "value": "Seeking student roles · 15–20 hours/week",
-        "detail": "From October 2026"
+        "label": "Focus",
+        "value": "C++, computer vision & AI",
+        "detail": "Semiconductor R&D · Hardware-oriented software"
       }
     ]
   },
@@ -78,39 +78,35 @@
   "experience": [
     {
       "role": "Software Engineer (R&D)",
-      "organization": "Frontier Semiconductor (FSM)",
-      "period": "Nov 2025 — Present",
+      "organization": "Frontier Semiconductor Metrology (FSM)",
+      "period": "Nov 2025 — Sep 2026",
       "location": "Dhaka, Bangladesh",
-      "current": true,
-      "context": "California-based semiconductor metrology company · Development team in Dhaka",
+      "current": false,
+      "context": "Semiconductor metrology equipment · Software engineering and R&D",
       "highlights": [
         {
           "label": "Tool software",
-          "text": "Built object-oriented C++/MFC software for tool automation, control, measurement-data processing, and visualization."
+          "text": "Built object-oriented C++/MFC software for tool control, automation, data processing, and visualization."
         },
         {
-          "label": "Applied AI",
-          "text": "Worked on local LLMs, RAG, and agentic workflows for natural-language operation of semiconductor tools."
+          "label": "CUDA image processing",
+          "text": "Worked on CUDA-based image processing for semiconductor metrology equipment."
         },
         {
-          "label": "Operator assistance",
-          "text": "Developed chatbot assistance for operator troubleshooting and guidance on machine procedures."
-        },
-        {
-          "label": "Image stitching R&D",
-          "text": "Conducted R&D on OpenCV-based image stitching to overcome camera field-of-view limitations, evaluating multiple geometric mapping, alignment, and blending algorithms to create seamless full-die images for inspection."
+          "label": "3D image stitching",
+          "text": "Stitched multiple 3D height-data images into one continuous die image when the camera field of view could not cover the whole die."
         },
         {
           "label": "Pattern recognition",
-          "text": "Contributed to a pattern-recognition pipeline that located a selected reference feature across every wafer die, improving repeatable positioning and measurement accuracy. Evaluated multiple recognition algorithms using OpenCV and other image-processing techniques."
+          "text": "Worked on OpenCV pattern recognition within wafer dies for structure inspection."
         },
         {
           "label": "Wafer mapping",
-          "text": "Reconstructed digital wafer die maps from four-point calibration across three adjacent dies and integrated the algorithms into an operator-facing C++/MFC interface."
+          "text": "Reconstructed a full virtual wafer die map from die coordinates calibrated using four points across three adjacent dies, enabling navigation to specific dies for inspection in C++/MFC."
         },
         {
-          "label": "Focus compensation",
-          "text": "Modelled a virtual 3D plane from sampled focal points and predicted Z-axis compensation, resolving probe-focusing failures on tilted stages before measurement."
+          "label": "Autofocus compensation",
+          "text": "Fixed stage-tilt autofocus issues using a virtual plane to adjust Z-axis focus height based on the probe’s wafer position."
         }
       ],
       "details": [],
@@ -118,26 +114,28 @@
         "C++",
         "MFC",
         "OpenCV",
-        "CUDA",
-        "Python",
-        "Local LLMs"
+        "CUDA"
       ]
     },
     {
       "role": "Technical Business Analyst",
       "organization": "US-Bangla Airlines",
-      "period": "Aug — Oct 2025",
+      "period": "Aug 2025 — Oct 2025",
       "location": "Dhaka, Bangladesh",
       "current": false,
       "context": "",
       "highlights": [
         {
-          "label": "Requirements to design",
-          "text": "Translated operational needs into technical specifications, documentation, and UI/UX wireframes."
+          "label": "FlightOps requirements",
+          "text": "Mapped FlightOps requirements with cabin and cockpit crews, scheduling executives, and the Operations Control Center."
         },
         {
-          "label": "Business logic",
-          "text": "Designed backend rules for crew training, certificate expiry, and programme assignments."
+          "label": "Requirements to design",
+          "text": "Converted stakeholder needs into technical specifications, software documentation, and developer UI/UX wireframes."
+        },
+        {
+          "label": "Crew-training logic",
+          "text": "Designed backend rules for training cycles, certificate expiry, and programme assignments."
         }
       ],
       "details": [],
@@ -194,162 +192,184 @@
       {
         "category": "Programming",
         "technologies": [
-          "C",
           "C++",
+          "C",
           "C#",
           "Python",
           "Java",
           "JavaScript",
-          "TypeScript",
-          "PHP",
           "HTML",
           "CSS"
         ]
       },
       {
-        "category": "Web & backend",
+        "category": "AI productivity",
         "technologies": [
-          "React",
+          "Prompt engineering",
+          "Effective use of AI agents"
+        ]
+      },
+      {
+        "category": "Productivity",
+        "technologies": [
+          "Microsoft Office"
+        ]
+      },
+      {
+        "category": "Web project toolkit",
+        "technologies": [
+          "TypeScript",
+          "PHP",
           "Next.js",
           "Node.js",
           "Express",
-          "ASP.NET Core",
-          "FastAPI",
-          "REST APIs",
-          "server-sent events",
-          "Tailwind CSS"
+          "Tailwind CSS",
+          "PostgreSQL",
+          "Prisma",
+          "Three.js"
         ]
       },
       {
-        "category": "Desktop & graphics",
+        "category": "Hardware & laboratory",
         "technologies": [
-          "MFC",
-          "Qt",
-          "GDI+",
-          "Java Swing",
-          "Three.js",
-          "OpenGL",
-          "iGraphics"
+          "Arduino",
+          "Raspberry Pi",
+          "Particulate-matter sensors",
+          "Humidity sensors",
+          "Digital displays",
+          "University prototyping"
         ]
       },
       {
-        "category": "Computer vision & ML",
+        "category": "AI & computer vision",
         "technologies": [
-          "OpenCV",
-          "CUDA",
-          "MediaPipe",
-          "DeepFace",
-          "RetinaFace",
-          "PyTorch",
-          "TensorFlow",
-          "scikit-learn",
-          "PySpark",
-          "image stitching",
-          "pattern recognition",
-          "geometric mapping",
+          "Computer vision",
+          "Image stitching",
+          "Geometric mapping",
+          "Pattern recognition",
+          "LLMs",
+          "Generative AI",
+          "Deep learning",
           "CNNs",
           "RNNs",
           "Deep Q-Networks"
         ]
       },
       {
-        "category": "LLMs & retrieval",
+        "category": "AI & ML libraries",
         "technologies": [
-          "Local LLMs",
-          "generative AI",
-          "RAG",
-          "embeddings",
-          "agentic workflows",
-          "LangChain",
-          "ChromaDB",
-          "Ollama",
-          "LM Studio"
+          "OpenCV",
+          "MediaPipe",
+          "DeepFace",
+          "RetinaFace",
+          "PyTorch",
+          "TensorFlow",
+          "CUDA",
+          "scikit-learn"
         ]
       },
       {
-        "category": "Databases & cloud",
+        "category": "LLMs, retrieval & backend",
         "technologies": [
+          "Local LLMs",
+          "RAG",
+          "Embeddings",
+          "Agentic workflows",
+          "FastAPI",
+          "LangChain",
+          "ChromaDB",
+          "Ollama",
+          "LM Studio",
+          "React",
+          "ASP.NET Core",
+          "REST APIs",
+          "Server-sent events"
+        ]
+      },
+      {
+        "category": "Cross-platform & systems",
+        "technologies": [
+          "Qt",
+          "Linux/Unix",
+          "Fedora (daily use)",
+          "Linux CLI",
+          "Windows",
+          "Docker",
+          "SSH"
+        ]
+      },
+      {
+        "category": "Desktop & engineering",
+        "technologies": [
+          "MFC",
+          "Visual Studio",
+          "GDI+",
+          "Java Swing",
+          "OOP",
+          "Data structures",
+          "Algorithms",
+          "Modular design",
+          "Code refactoring",
+          "Software architecture"
+        ]
+      },
+      {
+        "category": "Build & tools",
+        "technologies": [
+          "Git",
+          "Visual Studio solutions/projects",
+          ".NET CLI",
+          "Docker Compose",
+          "Postman"
+        ]
+      },
+      {
+        "category": "Data & cloud",
+        "technologies": [
+          "SQL",
+          "PySpark",
           "SQL Server",
           "MySQL",
-          "PostgreSQL",
           "Firebase",
           "Apache Derby",
-          "Prisma",
           "AWS EC2",
           "AWS S3"
         ]
       },
       {
-        "category": "Development & deployment",
+        "category": "Simulation & graphics",
         "technologies": [
-          "Git",
-          "Visual Studio",
-          "Visual Studio solutions/projects",
-          ".NET CLI",
-          "Postman",
-          "Docker",
-          "Docker Compose",
-          "Linux/Unix",
-          "Fedora",
-          "Linux CLI",
-          "Windows",
-          "SSH"
-        ]
-      },
-      {
-        "category": "Hardware & measurement",
-        "technologies": [
-          "Arduino",
-          "Raspberry Pi",
-          "particulate-matter and humidity sensing",
-          "digital displays",
-          "tool automation",
-          "calibration",
-          "data visualization",
-          "MCU fundamentals and CPU/GPU architecture"
-        ]
-      },
-      {
-        "category": "Engineering & research",
-        "technologies": [
-          "OOP",
-          "data structures",
-          "algorithms",
-          "modular design",
-          "refactoring",
-          "software architecture",
-          "requirements analysis",
-          "documentation",
-          "UI/UX wireframing",
-          "SUMO"
+          "SUMO",
+          "OpenGL",
+          "iGraphics"
         ]
       },
       {
         "category": "Current learning interests",
         "technologies": [
+          "Cross-platform C++",
+          "Embedded systems",
           "CMake",
-          "embedded systems",
-          "cross-platform C++",
-          "multimodal AI",
-          "real-time intelligent interactions"
+          "Multimodal AI",
+          "Real-time interaction"
         ]
       }
     ]
   },
   "education": [
     {
-      "degree": "MSc Automotive Software Engineering",
-      "institution": "TU Chemnitz",
-      "period": "Starting October 2026 · Germany",
-      "description": "Enrolled for the winter semester. Focus on embedded systems and software engineering.",
+      "degree": "MSc in Automotive Software Engineering",
+      "institution": "Chemnitz University of Technology (TU Chemnitz)",
+      "period": "October 2026 — Present · Chemnitz, Germany",
+      "description": "Currently studying Automotive Software Engineering at TU Chemnitz.",
       "result": ""
     },
     {
-      "degree": "BSc Computer Science and Engineering",
+      "degree": "BSc in Computer Science and Engineering",
       "institution": "Ahsanullah University of Science and Technology",
-      "period": "June 2021 — June 2025 · Bangladesh",
+      "period": "June 2021 — June 2025 · Dhaka, Bangladesh",
       "description": "",
-      "result": "3.719 / 4.00 CGPA"
+      "result": "CGPA 3.719 / 4.00 · German equivalent: 1.4"
     }
   ],
   "projects": {
@@ -362,12 +382,12 @@
           "label": "View source",
           "url": "https://github.com/mhtafhim/local-llm-chatbot-with-rag"
         },
-        "description": "A local assistant with document ingestion and retrieval, interchangeable model providers, streamed responses, and image/PDF attachments.",
+        "description": "A local LLM application with interchangeable Ollama and LM Studio providers, streamed responses, multimodal image/PDF attachments, and web-search augmentation.",
         "details": [
           {
             "title": "Implementation details",
             "paragraphs": [
-              "Connected LangChain embeddings and persistent ChromaDB storage to a FastAPI backend; packaged services with Docker Compose."
+              "Implemented ingestion and retrieval for PDF, DOCX, text, and Markdown using LangChain chunking, provider embeddings, and persistent ChromaDB storage; packaged the services for Linux and Windows with Docker Compose."
             ]
           }
         ],
@@ -380,18 +400,18 @@
         ]
       },
       {
-        "name": "Face Match",
+        "name": "Face Match — Biometric Face Analysis",
         "category": "Computer vision / Personal project",
         "link": {
           "label": "View source",
           "url": "https://github.com/mhtafhim/face-match"
         },
-        "description": "A face-analysis application using RetinaFace alignment and FaceNet512 embeddings to compare portraits through cosine distance.",
+        "description": "A computer-vision pipeline using RetinaFace alignment and FaceNet512 embeddings with cosine distance to determine whether two portraits show the same person.",
         "details": [
           {
             "title": "Implementation details",
             "paragraphs": [
-              "Visualized a 468-point facial mesh and regional measurements using MediaPipe, a FastAPI backend, and a React interface."
+              "Extracted and visualized a 468-point facial mesh and normalized regional measurements for eyes, nose, mouth, jaw, face height, and eyebrows; exposed results through a FastAPI backend and React interface."
             ]
           }
         ],
@@ -400,6 +420,7 @@
           "OpenCV",
           "DeepFace",
           "MediaPipe",
+          "FastAPI",
           "React"
         ]
       },
@@ -410,12 +431,12 @@
           "label": "View source",
           "url": "https://github.com/mhtafhim/Data-Analyzer"
         },
-        "description": "A Windows engineering tool for exploring structured text data in tables, hierarchy views, and interactive charts.",
+        "description": "A Windows engineering tool that parses structured text data, presents table and hierarchy views, and generates interactive charts with selectable axes.",
         "details": [
           {
             "title": "Implementation details",
             "paragraphs": [
-              "Built selectable chart axes, analysis modules, and image/data export as extensible application components."
+              "Organized file I/O, data vectors, tabbed analysis modules, chart controls, and image/data export into extensible application components."
             ]
           }
         ],
@@ -426,18 +447,18 @@
         ]
       },
       {
-        "name": "MFC Custom Controls",
+        "name": "Reusable MFC Custom Controls Library",
         "category": "UI engineering / Personal project",
         "link": {
           "label": "View source",
           "url": "https://github.com/mhtafhim/mfc-custom-controls"
         },
-        "description": "A modular library of 30 reusable desktop controls, including status indicators, sliders, panels, and a semiconductor wafer map.",
+        "description": "A modular library of 30 owner-drawn controls, including buttons, tabs, lists, sliders, status indicators, card panels, and a semiconductor wafer map.",
         "details": [
           {
             "title": "Implementation details",
             "paragraphs": [
-              "Separated reusable components from the demo and documented APIs, integration patterns, dependencies, and known issues."
+              "Separated reusable components from the demonstration application and documented APIs, integration patterns, resource dependencies, and known issues."
             ]
           }
         ],
@@ -466,7 +487,7 @@
         ]
       },
       {
-        "name": "Growthy Solutions",
+        "name": "Growthy Solutions Website",
         "category": "Web development",
         "link": {
           "label": "Visit website",
@@ -499,12 +520,12 @@
         ]
       },
       {
-        "name": "Railway eService",
+        "name": "Railway eService Platform & API",
         "url": "https://github.com/mhtafhim/railways3.0",
-        "description": "React booking interface and C# / ASP.NET Core API.",
+        "description": "Responsive ticketing platform for route search, scheduling, bookings, fares, and user management; C# / ASP.NET Core 8 REST API with JWT authentication, password hashing, Swagger documentation, and SQL Server persistence.",
         "links": [
           {
-            "label": "C# / ASP.NET Core API",
+            "label": "C# / ASP.NET Core 8 API",
             "url": "https://github.com/mhtafhim/railway_eservice_api"
           }
         ]
@@ -558,9 +579,9 @@
         "links": []
       },
       {
-        "name": "Sonic 2D Game",
+        "name": "SonicTheHedgeHog",
         "url": "https://github.com/mhtafhim/SonicTheHedgeHog",
-        "description": "University C++ / iGraphics game project.",
+        "description": "C++ / iGraphics / OpenGL 2D platformer with custom physics, frame-accurate collision handling, obstacle detection, and optimized rendering.",
         "links": []
       },
       {
@@ -578,16 +599,49 @@
     ],
     "research": [
       {
-        "name": "Deep reinforcement learning for traffic routing",
-        "description": "Implemented and evaluated DQNs in Python, PyTorch, and SUMO; analysed convergence, congestion, fuel use, and emissions."
+        "name": "Deep Reinforcement Learning for Intelligent Transportation Systems",
+        "description": "Implemented and evaluated a DQN-based approach for dynamic route optimization in urban traffic simulations.",
+        "details": [
+          {
+            "title": "Implementation details",
+            "paragraphs": [
+              "Analyzed convergence and adaptability under changing traffic conditions, measuring congestion, fuel use, and emissions."
+            ]
+          }
+        ],
+        "technologies": [
+          "Python",
+          "PyTorch",
+          "SUMO",
+          "Deep Q-Networks"
+        ]
       },
       {
-        "name": "Live weather-index display",
-        "description": "Used Arduino and Raspberry Pi to collect particulate-matter and humidity readings, feed them to a prediction model, and show the weather index on a digital display."
+        "name": "Live Weather-Index Display",
+        "category": "University laboratory project",
+        "description": "Measured particulate matter and humidity and passed sensor readings to a model to predict a weather index.",
+        "details": [
+          {
+            "title": "Implementation details",
+            "paragraphs": [
+              "Displayed the predicted index on a digital display for live environmental monitoring."
+            ]
+          }
+        ],
+        "technologies": [
+          "Arduino",
+          "Raspberry Pi",
+          "Environmental sensors",
+          "Digital display"
+        ]
       },
       {
-        "name": "Smart-city traffic automation",
-        "description": "Built an Arduino-based smart-city project with automated traffic management in a university laboratory."
+        "name": "Smart City with Automated Traffic Management",
+        "category": "University laboratory project",
+        "description": "Built an Arduino-based smart-city project with automated traffic management.",
+        "technologies": [
+          "Arduino"
+        ]
       }
     ]
   },
@@ -597,7 +651,7 @@
         "number": "700",
         "suffix": "+",
         "title": "Programming problems solved",
-        "description": "Across CSES, LeetCode, and other online judges.",
+        "description": "Across online judges, including CSES and LeetCode. Codeforces: 1263 (Pupil) · CodeChef: 1542 (3 Star).",
         "link": {
           "label": "Problem-solving work",
           "url": "https://github.com/mhtafhim/Messy-Stuffs"
@@ -607,7 +661,7 @@
         "number": "2",
         "suffix": "×",
         "title": "First place · Intra-AUST",
-        "description": "Programming Contest Fall 2022 & Spring 2023 · 100+ teams"
+        "description": "Intra-AUST Programming Contest · Fall 2022 and Spring 2023 · 100+ teams in each contest."
       },
       {
         "number": "100",
@@ -628,22 +682,23 @@
   },
   "about": {
     "paragraphs": [
-      "My work connects software with the systems it operates.",
-      "At Frontier Semiconductor, I work on tool automation, measurement processing, and operator interfaces. That work extends into computer vision for wafer inspection and local AI assistants for machine operation and troubleshooting.",
-      "I’m enrolled in the MSc Automotive Software Engineering programme at TU Chemnitz, starting October 2026, with a focus on embedded systems and software engineering."
+      "I’m a software engineer and MSc Automotive Software Engineering student at TU Chemnitz, based in Chemnitz, Germany.",
+      "My professional experience spans C++, computer vision, machine learning, hardware-oriented desktop software, backend development, and requirements engineering. At Frontier Semiconductor Metrology, my R&D work included 3D height-data image stitching, OpenCV pattern recognition, wafer mapping, and position-based autofocus compensation.",
+      "I enjoy algorithms, object-oriented and modular design, and technical problem-solving. I’ve solved 700+ programming problems and earned two first-place finishes in Intra-AUST programming contests. I’m highly comfortable with Linux/Unix systems and use Fedora daily.",
+      "My current interests include cross-platform C++, embedded systems, CMake, multimodal AI, and real-time interaction."
     ],
     "notes": [
-      "Based in Dhaka",
-      "Relocating to Chemnitz, Germany · October 2026"
+      "Based in Chemnitz, Germany",
+      "MSc Automotive Software Engineering · TU Chemnitz"
     ],
     "languages": [
       {
-        "name": "English",
-        "level": "Fluent · IELTS 6.5"
-      },
-      {
         "name": "Bengali",
         "level": "Native"
+      },
+      {
+        "name": "English",
+        "level": "Fluent · IELTS 6.5"
       },
       {
         "name": "German",
@@ -652,9 +707,9 @@
     ]
   },
   "contact": {
-    "description": "Interested in student opportunities in software engineering, embedded systems, computer vision, and applied AI.",
-    "availability": "From October 2026 · 15–20 hours/week",
-    "note": "Planning to live in Chemnitz while studying at TU Chemnitz.",
+    "description": "Interested in student opportunities in software engineering, embedded systems, computer vision, and AI.",
+    "availability": "",
+    "note": "Based in Chemnitz, Germany · MSc Automotive Software Engineering student at TU Chemnitz.",
     "email": "mahmudulhoquetafhim@gmail.com"
   }
 }
