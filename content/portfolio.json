@@ -2,11 +2,11 @@
   "profile": {
     "name": "Mahmudul Haque",
     "monogram": "mht",
-    "page_title": "Mahmudul Haque | Software Engineer — C++, Computer Vision & AI",
-    "description": "Mahmudul Haque — software engineer and MSc Automotive Software Engineering student at TU Chemnitz, based in Chemnitz, Germany. C++, computer vision, AI, and hardware-oriented software.",
-    "role": "Software Engineer | C++, Computer Vision & AI",
+    "page_title": "Mahmudul Haque | Software Engineer (C++)",
+    "description": "Mahmudul Haque — C++ software engineer based in Leipzig, Germany, and MSc Automotive Software Engineering student at TU Chemnitz. Experience in semiconductor metrology, image processing, and tool automation.",
+    "role": "Software Engineer (C++)",
     "employer": "Previously at Frontier Semiconductor Metrology (FSM) · November 2025 — September 2026",
-    "summary": "MSc Automotive Software Engineering student at TU Chemnitz, with professional experience in C++, computer vision, machine learning, hardware-oriented desktop software, backend development, and requirements engineering.",
+    "summary": "MSc Automotive Software Engineering student at TU Chemnitz with professional experience developing C++/MFC software for semiconductor tool automation, measurement-data processing, and operator interfaces.",
     "photo": {
       "src": "assets/images/profile.jpg",
       "alt": "Portrait of Mahmudul Haque"
@@ -29,7 +29,7 @@
     "facts": [
       {
         "label": "Location",
-        "value": "Chemnitz, Germany",
+        "value": "Leipzig, Germany",
         "detail": ""
       },
       {
@@ -39,8 +39,8 @@
       },
       {
         "label": "Focus",
-        "value": "C++, computer vision & AI",
-        "detail": "Semiconductor R&D · Hardware-oriented software"
+        "value": "C++ & image processing",
+        "detail": "Tool automation · OpenCV · CUDA"
       }
     ]
   },
@@ -86,27 +86,23 @@
       "highlights": [
         {
           "label": "Tool software",
-          "text": "Built object-oriented C++/MFC software for tool control, automation, data processing, and visualization."
+          "text": "Developed C++/MFC software for tool automation, measurement-data processing, and operator interfaces."
         },
         {
-          "label": "CUDA image processing",
-          "text": "Worked on CUDA-based image processing for semiconductor metrology equipment."
+          "label": "Wafer mapping accuracy",
+          "text": "Improved virtual wafer die-map reconstruction accuracy from approximately 70% to nearly 95%, using four calibration points across three adjacent dies; checked through practical tool measurements."
+        },
+        {
+          "label": "Faster autofocus",
+          "text": "Reduced long-range autofocus time from over 10 seconds to 2–3 seconds by correcting stage tilt with a virtual plane and position-dependent Z-axis adjustment."
         },
         {
           "label": "3D image stitching",
-          "text": "Stitched multiple 3D height-data images into one continuous die image when the camera field of view could not cover the whole die."
+          "text": "Implemented 3D height-data image stitching from scratch to reconstruct a full die beyond one camera field of view."
         },
         {
-          "label": "Pattern recognition",
-          "text": "Worked on OpenCV pattern recognition within wafer dies for structure inspection."
-        },
-        {
-          "label": "Wafer mapping",
-          "text": "Reconstructed a full virtual wafer die map from die coordinates calibrated using four points across three adjacent dies, enabling navigation to specific dies for inspection in C++/MFC."
-        },
-        {
-          "label": "Autofocus compensation",
-          "text": "Fixed stage-tilt autofocus issues using a virtual plane to adjust Z-axis focus height based on the probe’s wafer position."
+          "label": "Pattern recognition & CUDA",
+          "text": "Developed OpenCV pattern recognition for wafer-die structure inspection and applied CUDA to image processing."
         }
       ],
       "details": [],
@@ -114,7 +110,9 @@
         "C++",
         "MFC",
         "OpenCV",
-        "CUDA"
+        "CUDA",
+        "Visual Studio",
+        "Git"
       ]
     },
     {
@@ -126,16 +124,8 @@
       "context": "",
       "highlights": [
         {
-          "label": "FlightOps requirements",
-          "text": "Mapped FlightOps requirements with cabin and cockpit crews, scheduling executives, and the Operations Control Center."
-        },
-        {
-          "label": "Requirements to design",
-          "text": "Converted stakeholder needs into technical specifications, software documentation, and developer UI/UX wireframes."
-        },
-        {
-          "label": "Crew-training logic",
-          "text": "Designed backend rules for training cycles, certificate expiry, and programme assignments."
+          "label": "Requirements engineering",
+          "text": "Translated flight-operations requirements into specifications, UI wireframes, and crew-training and certification rules."
         }
       ],
       "details": [],
@@ -149,42 +139,41 @@
   "skills": {
     "core": [
       {
-        "category": "Industrial & desktop software",
+        "category": "C++ & desktop development",
         "technologies": [
           "C",
           "C++",
           "MFC",
-          "Qt",
-          "GDI+"
+          "Visual Studio"
         ]
       },
       {
-        "category": "Computer vision & machine learning",
+        "category": "Image processing",
         "technologies": [
           "OpenCV",
-          "CUDA",
-          "MediaPipe",
-          "PyTorch"
+          "CUDA"
         ]
       },
       {
-        "category": "Applied AI & retrieval",
+        "category": "AI & backend",
         "technologies": [
           "Python",
           "Local LLMs",
           "RAG",
-          "LangChain",
-          "ChromaDB"
+          "FastAPI",
+          "PyTorch",
+          "NumPy",
+          "pandas"
         ]
       },
       {
-        "category": "Web & backend",
+        "category": "Engineering fundamentals & practices",
         "technologies": [
-          "TypeScript",
-          "React",
-          "Next.js",
-          "FastAPI",
-          "PostgreSQL"
+          "OOP",
+          "Algorithms & data structures",
+          "Unit testing",
+          "Agile",
+          "Code refactoring"
         ]
       }
     ],
@@ -265,7 +254,9 @@
           "PyTorch",
           "TensorFlow",
           "CUDA",
-          "scikit-learn"
+          "scikit-learn",
+          "NumPy",
+          "pandas"
         ]
       },
       {
@@ -310,7 +301,9 @@
           "Algorithms",
           "Modular design",
           "Code refactoring",
-          "Software architecture"
+          "Software architecture",
+          "Unit testing",
+          "Agile"
         ]
       },
       {
@@ -328,7 +321,7 @@
         "technologies": [
           "SQL",
           "PySpark",
-          "SQL Server",
+          "MSSQL (SQL Server)",
           "MySQL",
           "Firebase",
           "Apache Derby",
@@ -360,21 +353,43 @@
     {
       "degree": "MSc in Automotive Software Engineering",
       "institution": "Chemnitz University of Technology (TU Chemnitz)",
-      "period": "October 2026 — Present · Chemnitz, Germany",
-      "description": "Currently studying Automotive Software Engineering at TU Chemnitz.",
+      "period": "October 2026 — Present · Germany",
+      "description": "Current coursework: Hardware–Software Codesign, Image Understanding, and AI for Mobile Robots.",
       "result": ""
     },
     {
       "degree": "BSc in Computer Science and Engineering",
       "institution": "Ahsanullah University of Science and Technology",
       "period": "June 2021 — June 2025 · Dhaka, Bangladesh",
-      "description": "",
-      "result": "CGPA 3.719 / 4.00 · German equivalent: 1.4"
+      "description": "Coursework: Operating Systems, Networking, Databases, Computer Architecture, and Digital Image Processing.",
+      "result": "CGPA 3.719 / 4.00 · Rank: 5th of 64"
     }
   ],
   "projects": {
     "repository_url": "https://github.com/mhtafhim",
     "featured": [
+      {
+        "name": "Data Analyzer",
+        "category": "Desktop software / Personal project",
+        "link": {
+          "label": "View source",
+          "url": "https://github.com/mhtafhim/Data-Analyzer"
+        },
+        "description": "A C++/MFC tool to parse structured text, explore table and hierarchy views, and generate charts with image and data export.",
+        "details": [
+          {
+            "title": "Implementation details",
+            "paragraphs": [
+              "Organized file I/O, data vectors, tabbed analysis modules, chart controls, and image/data export into extensible application components."
+            ]
+          }
+        ],
+        "technologies": [
+          "C++11",
+          "MFC",
+          "Visual Studio"
+        ]
+      },
       {
         "name": "Local LLM Chatbot with RAG",
         "category": "Applied AI / Personal project",
@@ -382,7 +397,7 @@
           "label": "View source",
           "url": "https://github.com/mhtafhim/local-llm-chatbot-with-rag"
         },
-        "description": "A local LLM application with interchangeable Ollama and LM Studio providers, streamed responses, multimodal image/PDF attachments, and web-search augmentation.",
+        "description": "A local chatbot with document retrieval, interchangeable model providers, streaming, and persistent storage.",
         "details": [
           {
             "title": "Implementation details",
@@ -394,9 +409,22 @@
         "technologies": [
           "Python",
           "FastAPI",
-          "LangChain",
           "ChromaDB",
-          "Docker"
+          "Ollama"
+        ]
+      },
+      {
+        "name": "Sonic the Hedgehog",
+        "category": "C++ / Game development",
+        "link": {
+          "label": "View source",
+          "url": "https://github.com/mhtafhim/SonicTheHedgeHog"
+        },
+        "description": "A 2D platformer with custom physics, collision handling, obstacle detection, and optimized rendering.",
+        "technologies": [
+          "C++",
+          "iGraphics",
+          "OpenGL"
         ]
       },
       {
@@ -422,28 +450,6 @@
           "MediaPipe",
           "FastAPI",
           "React"
-        ]
-      },
-      {
-        "name": "Data Analyzer",
-        "category": "Desktop software / Personal project",
-        "link": {
-          "label": "View source",
-          "url": "https://github.com/mhtafhim/Data-Analyzer"
-        },
-        "description": "A Windows engineering tool that parses structured text data, presents table and hierarchy views, and generates interactive charts with selectable axes.",
-        "details": [
-          {
-            "title": "Implementation details",
-            "paragraphs": [
-              "Organized file I/O, data vectors, tabbed analysis modules, chart controls, and image/data export into extensible application components."
-            ]
-          }
-        ],
-        "technologies": [
-          "C++11",
-          "MFC",
-          "Visual Studio"
         ]
       },
       {
@@ -579,12 +585,6 @@
         "links": []
       },
       {
-        "name": "SonicTheHedgeHog",
-        "url": "https://github.com/mhtafhim/SonicTheHedgeHog",
-        "description": "C++ / iGraphics / OpenGL 2D platformer with custom physics, frame-accurate collision handling, obstacle detection, and optimized rendering.",
-        "links": []
-      },
-      {
         "name": "CUDA Learning Site",
         "url": "https://github.com/mhtafhim/cuda-course",
         "description": "Interactive browser-based learning material.",
@@ -648,13 +648,23 @@
   "achievements": {
     "featured": [
       {
-        "number": "700",
+        "number": "500",
         "suffix": "+",
-        "title": "Programming problems solved",
-        "description": "Across online judges, including CSES and LeetCode. Codeforces: 1263 (Pupil) · CodeChef: 1542 (3 Star).",
+        "title": "Problems solved across platforms & contests",
+        "description": "Across Codeforces, CodeChef, ICPC, and UVa.",
         "link": {
           "label": "Problem-solving work",
           "url": "https://github.com/mhtafhim/Messy-Stuffs"
+        }
+      },
+      {
+        "number": "140",
+        "suffix": "+",
+        "title": "LeetCode problems solved",
+        "description": "Algorithm and data-structure problem solving on LeetCode.",
+        "link": {
+          "label": "LeetCode profile",
+          "url": "https://leetcode.com/u/mhtafhim/"
         }
       },
       {
@@ -662,15 +672,10 @@
         "suffix": "×",
         "title": "First place · Intra-AUST",
         "description": "Intra-AUST Programming Contest · Fall 2022 and Spring 2023 · 100+ teams in each contest."
-      },
-      {
-        "number": "100",
-        "suffix": "%",
-        "title": "Undergraduate scholarship",
-        "description": "Fully funded scholarship awarded to 3% of students."
       }
     ],
     "recognition": [
+      "Undergraduate scholarship: Fully funded scholarship awarded to 3% of students.",
       "Khondaker Ahmed Muktadir and Mosammat Khodeza Begum Scholarship; awarded to two students.",
       "Participant, National Undergraduate Mathematics Olympiad (NUMO 2023)."
     ],
@@ -682,13 +687,13 @@
   },
   "about": {
     "paragraphs": [
-      "I’m a software engineer and MSc Automotive Software Engineering student at TU Chemnitz, based in Chemnitz, Germany.",
-      "My professional experience spans C++, computer vision, machine learning, hardware-oriented desktop software, backend development, and requirements engineering. At Frontier Semiconductor Metrology, my R&D work included 3D height-data image stitching, OpenCV pattern recognition, wafer mapping, and position-based autofocus compensation.",
-      "I enjoy algorithms, object-oriented and modular design, and technical problem-solving. I’ve solved 700+ programming problems and earned two first-place finishes in Intra-AUST programming contests. I’m highly comfortable with Linux/Unix systems and use Fedora daily.",
-      "My current interests include cross-platform C++, embedded systems, CMake, multimodal AI, and real-time interaction."
+      "I’m a C++ software engineer based in Leipzig, Germany, and an MSc Automotive Software Engineering student at TU Chemnitz.",
+      "At Frontier Semiconductor Metrology, I developed C++/MFC software for semiconductor tool automation, measurement-data processing, and operator interfaces. My R&D work included wafer mapping, position-dependent autofocus compensation, 3D height-data image stitching, and OpenCV/CUDA image processing.",
+      "I enjoy object-oriented programming, algorithms, data structures, and practical problem-solving. I’ve solved 500+ problems across platforms and contests including Codeforces, CodeChef, ICPC, and UVa, and 140+ problems on LeetCode, and earned two first-place finishes in Intra-AUST programming contests.",
+      "My current MSc coursework covers Hardware–Software Codesign, Image Understanding, and AI for Mobile Robots. My engineering toolkit includes Linux CLI, SSH, Git, unit testing, Agile practices, and code refactoring."
     ],
     "notes": [
-      "Based in Chemnitz, Germany",
+      "Based in Leipzig, Germany",
       "MSc Automotive Software Engineering · TU Chemnitz"
     ],
     "languages": [
@@ -698,18 +703,18 @@
       },
       {
         "name": "English",
-        "level": "Fluent · IELTS 6.5"
+        "level": "Fluent"
       },
       {
         "name": "German",
-        "level": "A1 / beginner"
+        "level": "Beginner"
       }
     ]
   },
   "contact": {
-    "description": "Interested in student opportunities in software engineering, embedded systems, computer vision, and AI.",
+    "description": "Interested in student opportunities in C++ software engineering, image processing, tool automation, and AI.",
     "availability": "",
-    "note": "Based in Chemnitz, Germany · MSc Automotive Software Engineering student at TU Chemnitz.",
+    "note": "Based in Leipzig, Germany · +49 163 7906241 · MSc Automotive Software Engineering student at TU Chemnitz.",
     "email": "mahmudulhoquetafhim@gmail.com"
   }
 }
